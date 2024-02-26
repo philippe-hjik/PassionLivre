@@ -169,6 +169,7 @@ const livreModel = (sequelize, DataTypes) => {
         },
         cover: {
             type: DataTypes.STRING,
+            allowNull: true,
             validate: {
                 notEmpty: {
                     msg: "Le nom ne peut pas être vide.",
@@ -187,5 +188,5 @@ const livreModel = (sequelize, DataTypes) => {
     );
   };
   
-  export { ProductModel };
+  export { livreModel };
   
