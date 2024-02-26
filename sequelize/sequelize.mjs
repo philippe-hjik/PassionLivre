@@ -28,7 +28,7 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncro ecrase ce qui etait present avant
     .then((_) => {
-        importBooks();
+        //importBooks();
       //importUsers();
       console.log();
     });
@@ -67,4 +67,4 @@ const importUsers = () => {
     .then((user) => console.log(user.toJSON()));
 };
 
-export { sequelize, initDb, Book, User};
+export { sequelize, initDb, Book};
