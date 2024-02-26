@@ -45,4 +45,3 @@ const userModel = (sequelize, DataTypes) => {
   };
   
   export { userModel };
-  
