@@ -22,21 +22,21 @@ const sequelize = new Sequelize(
 );
 
 const Book = bookModel(sequelize, DataTypes);
-const User = userModel(sequelize, DataTypes);
+//const User = userModel(sequelize, DataTypes);
 
 let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncro ecrase ce qui etait present avant
     .then((_) => {
         importBooks();
-      importUsers();
+      //importUsers();
       console.log();
     });
 };
 
-const importBooks = async (bookData, bookModel) => {
-    try {
-        const book = await bookModel.create({
+const importBooks = () => {
+    bookData.map((bookData) => {
+        Book.create({
             id: bookData.id,
             title: bookData.title,
             categorie: bookData.categorie,
@@ -51,11 +51,8 @@ const importBooks = async (bookData, bookModel) => {
             avgAppreciation: bookData.avgAppreciation,
             comments: bookData.comments,
             cover: bookData.cover
-        });
-        console.log("Livre importé avec succès :", book.toJSON());
-    } catch (error) {
-        console.error("Erreur lors de l'importation du livre :", error);
-    }
+      }).then((bookData) => console.log(bookData.toJSON()));
+    });
 };
 
 const importUsers = () => {

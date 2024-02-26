@@ -1,9 +1,11 @@
 import express from "express";
+import { initDb } from "../sequelize/sequelize.mjs";
+
 const app = express();
 const port = 3000;
 
 //Iniatialise la db avec le json du mock
-//initDb();
+initDb();
 
 app.use(express.json());
 

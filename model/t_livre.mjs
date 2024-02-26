@@ -153,11 +153,11 @@ const bookModel = (sequelize, DataTypes) => {
         },
         avgAppreciation: {
             type: DataTypes.FLOAT,
-            allowNull: true,
+            allowNull: false,
         },
         comments: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
             validate: {
                 notEmpty: {
                     msg: "Le nom ne peut pas être vide.",
@@ -169,7 +169,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         cover: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
             validate: {
                 notEmpty: {
                     msg: "Le nom ne peut pas être vide.",
