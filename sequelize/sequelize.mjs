@@ -1,6 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 
-import { bookModel } from "../model/t_livre.mjs";
+import { bookModel } from "../model/t_books.mjs";
 import { userModel } from "../model/t_users.mjs";
 
 import { bookData } from "./mock-books.mjs";
@@ -26,7 +26,7 @@ const sequelize = new Sequelize(
 );
 
 const Book = bookModel(sequelize, DataTypes);
-const User = userModel(sequelize, DataTypes);
+//const User = userModel(sequelize, DataTypes);
 
 let initDb = () => {
   return sequelize
@@ -72,4 +72,4 @@ const importUsers = () => {
     .then((user) => console.log(user.toJSON()));
 };
 */
-export { sequelize, initDb, Book, User};
+export { sequelize, initDb, Book};
