@@ -5,16 +5,20 @@ import { userModel } from "../model/t_users.mjs";
 
 import { bookData } from "./mock-books.mjs";
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 //import { hash, bcrypt } from "bcrypt";
 
 import * as bcrypt from "bcrypt";
 
 const sequelize = new Sequelize(
-  "db_livre", // Nom de la DB qui doit exister
-  "root", // Nom de l'utilisateur
-  "root", // Mot de passe de l'utilisateur
+  process.env.DB_NAME, // Nom de la DB qui doit exister
+  process.env.DB_USER, // Nom de l'utilisateur
+  process.env.DB_PASSWORD, // Mot de passe de l'utilisateur
   {
-    host: "localhost",
+    host: process.env.DB_HOST,
     port: 6033,
     dialect: "mysql",
     logging: false,
