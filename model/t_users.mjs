@@ -1,47 +1,39 @@
 const userModel = (sequelize, DataTypes) => {
-    return sequelize.define(
-      "Users",
-      {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
+  return sequelize.define("t_users", {
+    id_user: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    username_user: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
         },
-        pseudo: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          validate: {
-            notEmpty: {
-              msg: "Le nom ne peut pas être vide.",
-            },
-            notNull: {
-              msg: "Le nom est une propriété obligatoire.",
-            },
-          },
-        },
-        subscribeDate: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        nbOuvrages: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        nbAppreciation: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        nbComments: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
+        notNull: {
+          msg: "Le nom est une propriété obligatoire.",
         },
       },
-      {
-        timestamps: true,
-        createdAt: "created",
-        updateAt: false,
-      }
-    );
-  };
-  
-  export { userModel };
+    },
+    password_user: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
+        },
+        notNull: {
+          msg: "Le nom est une propriété obligatoire.",
+        },
+      },
+    },
+
+  },{
+      timestamps: true,
+      createdAt: "created",
+  });
+};
+
+export { userModel };

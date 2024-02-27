@@ -1,5 +1,5 @@
 const bookModel = (sequelize, DataTypes) => {
-    const Book = sequelize.define(
+    return sequelize.define(
       "t_books",
       {
         id_book: {
@@ -160,7 +160,6 @@ const bookModel = (sequelize, DataTypes) => {
         updateAt: false,
       }
     );
-    return Book;
   };
   
   export { bookModel };
