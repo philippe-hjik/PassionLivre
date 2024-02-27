@@ -107,8 +107,8 @@ const bookModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
             allowNull: false,
             references: {
-              model: 'Users', // Nom de la table que vous référencez
-              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
+              model: 't_publishers', // Nom de la table que vous référencez
+              key: 'id_publisher' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -117,18 +117,8 @@ const bookModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
             allowNull: false,
             references: {
-              model: 'Users', // Nom de la table que vous référencez
-              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
-            },
-            onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
-            onDelete: 'RESTRICT'
-        },
-        fk_autor: { // Champ pour la clé étrangère
-            type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
-            allowNull: false,
-            references: {
-              model: 'Users', // Nom de la table que vous référencez
-              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
+              model: 't_auhtors', // Nom de la table que vous référencez
+              key: 'id_auhtor' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -137,8 +127,8 @@ const bookModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
             allowNull: false,
             references: {
-              model: 'Users', // Nom de la table que vous référencez
-              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
+              model: 't_categories', // Nom de la table que vous référencez
+              key: 'id_category' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -147,8 +137,8 @@ const bookModel = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
             allowNull: false,
             references: {
-              model: 'Users', // Nom de la table que vous référencez
-              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
+              model: 't_users', // Nom de la table que vous référencez
+              key: 'id_user' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'

@@ -1,9 +1,11 @@
 import { DataTypes, Sequelize } from "sequelize";
 
 import { bookModel } from "../model/t_books.mjs";
+import { authorModel } from "../model/t_authors.mjs"
+import { categoryModel } from "../model/t_categories.mjs"
+import { commentModel } from "../model/t_comments.mjs"
+import { publisherModel } from "../model/t_publishers.mjs"
 import { userModel } from "../model/t_users.mjs";
-
-import { bookData } from "./mock-books.mjs";
 
 import dotenv from 'dotenv';
 
@@ -26,7 +28,11 @@ const sequelize = new Sequelize(
 );
 
 const Book = bookModel(sequelize, DataTypes);
-//const User = userModel(sequelize, DataTypes);
+const author = authorModel(sequelize, DataTypes);
+const category = categoryModel(sequelize, DataTypes);
+const comment = commentModel(sequelize, DataTypes);
+const publisher = publisherModel(sequelize, DataTypes);
+const User = userModel(sequelize, DataTypes);
 
 let initDb = () => {
   return sequelize
@@ -72,4 +78,4 @@ const importUsers = () => {
     .then((user) => console.log(user.toJSON()));
 };
 */
-export { sequelize, initDb, Book};
+export { sequelize, initDb, Book, User, author, category, comment, publisher};

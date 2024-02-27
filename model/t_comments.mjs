@@ -7,6 +7,18 @@ const commentModel = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true,
         },
+        note_comment: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                  msg: "Le nom ne peut pas être vide.",
+                },
+                notNull: {
+                  msg: "Le nom est une propriété obligatoire.",
+                },
+            },
+        },
         text_comment: {
             type: DataTypes.STRING,
             allowNull: false,

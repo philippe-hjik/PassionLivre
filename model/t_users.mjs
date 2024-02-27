@@ -29,7 +29,42 @@ const userModel = (sequelize, DataTypes) => {
         },
       },
     },
-
+    nbBooksOffer_user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
+        },
+        notNull: {
+          msg: "Le nom est une propriété obligatoire.",
+        },
+      },
+    },
+    nbNote_user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
+        },
+        notNull: {
+          msg: "Le nom est une propriété obligatoire.",
+        },
+      },
+    },
+    nbComment_user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
+        },
+        notNull: {
+          msg: "Le nom est une propriété obligatoire.",
+        },
+      },
+    },    
   },{
       timestamps: true,
       createdAt: "created",
