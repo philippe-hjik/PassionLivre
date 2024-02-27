@@ -26,7 +26,7 @@ const sequelize = new Sequelize(
 );
 
 const Book = bookModel(sequelize, DataTypes);
-//const User = userModel(sequelize, DataTypes);
+const User = userModel(sequelize, DataTypes);
 
 let initDb = () => {
   return sequelize
@@ -38,6 +38,7 @@ let initDb = () => {
     });
 };
 
+/*
 const importBooks = () => {
     bookData.map((bookData) => {
         Book.create({
@@ -70,5 +71,5 @@ const importUsers = () => {
     )
     .then((user) => console.log(user.toJSON()));
 };
-
-export { sequelize, initDb, Book};
+*/
+export { sequelize, initDb, Book, User};
