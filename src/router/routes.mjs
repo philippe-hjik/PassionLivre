@@ -33,7 +33,17 @@ bookRouter.get('/:id', (req, res) => {
 // Route de post
 bookRouter.post('/', (req, res) => {
     const title_book = req.body.title_book;
-    
+    return Book.create({
+        title_book: title_book
+    })
+    .then((products) => {
+        const message = `Le produit à bien été créé`;
+        res.status(200).json(products);
+      })
+      .catch((error) => {
+        const message = `Le produit n'à pas bien été créé Error: ${error}`;
+        res.status(500).json(message);
+     });
 });
 
 // Route de update
