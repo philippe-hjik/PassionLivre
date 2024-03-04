@@ -21,7 +21,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         pages_book: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 is: {
                     args: /^[0-9]\d+$/,
@@ -30,50 +30,38 @@ const bookModel = (sequelize, DataTypes) => {
                 notEmpty: {
                   msg: "Le nom ne peut pas être vide.",
                 },
-                notNull: {
-                  msg: "Le nom est une propriété obligatoire.",
-                },
             },
         },
         extract_book: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 notEmpty: {
                   msg: "Le nom ne peut pas être vide.",
-                },
-                notNull: {
-                  msg: "Le nom est une propriété obligatoire.",
                 },
             },
         },
         summary_book: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 notEmpty: {
                   msg: "Le nom ne peut pas être vide.",
-                },
-                notNull: {
-                  msg: "Le nom est une propriété obligatoire.",
                 },
             },
         },
         cover: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 notEmpty: {
                     msg: "Le nom ne peut pas être vide.",
-                },
-                notNull: {
-                    msg: "Le nom est une propriété obligatoire.",
                 },
             }
         },
         year_book: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 is: {
                     args: /^[0-9]\d+$/,
@@ -82,30 +70,24 @@ const bookModel = (sequelize, DataTypes) => {
                 notEmpty: {
                   msg: "Le nom ne peut pas être vide.",
                 },
-                notNull: {
-                  msg: "Le nom est une propriété obligatoire.",
-                },
             }
         },
         average_book: {
             type: DataTypes.FLOAT,
-            allowNull: false,
+            allowNull: true,
         },
         upload_book: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 notEmpty: {
                     msg: "Le nom ne peut pas être vide.",
-                },
-                notNull: {
-                    msg: "Le nom est une propriété obligatoire.",
                 },
             }
         },
         fk_publishers: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
-            allowNull: false,
+            allowNull: true,
             references: {
               model: 't_publishers', // Nom de la table que vous référencez
               key: 'id_publisher' // Nom de la colonne que vous référencez dans la table des auteurs
@@ -115,7 +97,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         fk_author: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
-            allowNull: false,
+            allowNull: true,
             references: {
               model: 't_authors', // Nom de la table que vous référencez
               key: 'id_author' // Nom de la colonne que vous référencez dans la table des auteurs
@@ -125,7 +107,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         fk_category: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
-            allowNull: false,
+            allowNull: true,
             references: {
               model: 't_categories', // Nom de la table que vous référencez
               key: 'id_category' // Nom de la colonne que vous référencez dans la table des auteurs
@@ -135,7 +117,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         fk_user: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
-            allowNull: false,
+            allowNull: true,
             references: {
               model: 't_users', // Nom de la table que vous référencez
               key: 'id_user' // Nom de la colonne que vous référencez dans la table des auteurs
