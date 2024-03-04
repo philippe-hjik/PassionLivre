@@ -1,29 +1,37 @@
 // routes.mjs
-
+import { Book } from "../../sequelize/sequelize.mjs"
 import express from 'express';
-const router = express.Router();
+
+const bookRouter = express();
 
 // Route de get
-router.get('/home', (req, res) => {
-
-
+bookRouter.get('/', (req, res) => {
+ return Book.findAll()    
+ .then((products) => {
+    const message = "La liste des produits a bien été récupérée.";
+    res.status(200).json(message, products);
+  })
+  .catch((error) => {
+    const message = `La liste des produits n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
+    res.status(500).json({ message, data: error });
+  });
 });
 
 // Route de post
-router.post('/', (req, res) => {
+bookRouter.post('/', (req, res) => {
 
 });
 
 // Route de update
-router.put('/', (req, res) => {
+bookRouter.put('/', (req, res) => {
 
 });
 
 // Route de delete
-router.delete('/', (req, res) => {
+bookRouter.delete('/', (req, res) => {
 
 });
 
 
 // Exporter le routeur
-export { router };
+export { bookRouter };

@@ -13,8 +13,6 @@ dotenv.config();
 
 //import { hash, bcrypt } from "bcrypt";
 
-import * as bcrypt from "bcrypt";
-
 const sequelize = new Sequelize(
   process.env.DB_NAME, // Nom de la DB qui doit exister
   process.env.DB_USER, // Nom de l'utilisateur
@@ -40,7 +38,6 @@ let initDb = () => {
     .then((_) => {
         //importBooks();
       //importUsers();
-      console.log();
     });
 };
 
