@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 //Iniatialise la db avec le json du mock
-initDb();
+//initDb();
 sequelize.authenticate().then((_) => {
   console.log("Connexion établie");
 }).catch((error) => {

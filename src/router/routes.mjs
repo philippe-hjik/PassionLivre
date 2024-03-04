@@ -9,11 +9,11 @@ bookRouter.get('/', (req, res) => {
  return Book.findAll()    
  .then((products) => {
     const message = "La liste des produits a bien été récupérée.";
-    res.status(200).json(message, products);
+    res.status(200).json(products);
   })
   .catch((error) => {
     const message = `La liste des produits n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-    res.status(500).json({ message, data: error });
+    res.send(message);
   });
 });
 
