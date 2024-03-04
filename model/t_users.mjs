@@ -51,17 +51,6 @@ const userModel = (sequelize, DataTypes) => {
         notNull: {
           msg: "Le nom est une propriété obligatoire.",
         },
-        min: {
-          args: 0,
-          msg: "La note minimale est 0.",
-        },
-        max: {
-            args: 5,
-            msg: "La note maximale est 5.",
-        },
-        isInt: {
-            msg: "La note doit être un entier.",
-        },
       },
     },
     nbComment_user: {
