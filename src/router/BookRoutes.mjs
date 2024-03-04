@@ -31,19 +31,6 @@ bookRouter.get('/:id', (req, res) => {
     });
 });
 
-// Route Get des commentaires des livres
-bookRouter.get('/comments', (req, res) => {
-  return Book.findAll()    
-  .then((Book) => {
-     const message = "La liste des livres a bien été récupérée.";
-     res.status(200).json(Book);
-   })
-   .catch((error) => {
-     const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-     res.status(500).json(message);
-   });
- });
-
 // Route de post
 bookRouter.post('/', (req, res) => {
     const title_book = req.body.title_book;
