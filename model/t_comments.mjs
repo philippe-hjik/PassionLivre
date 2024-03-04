@@ -39,7 +39,7 @@ const commentModel = (sequelize, DataTypes) => {
               key: 'id_book' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         },
         fk_user: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
@@ -49,7 +49,7 @@ const commentModel = (sequelize, DataTypes) => {
               key: 'id_user' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
-            onDelete: 'RESTRICT'
+            onDelete: 'CASCADE'
         },
       }
     );
