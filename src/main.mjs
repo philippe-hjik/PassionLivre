@@ -1,7 +1,8 @@
 import express from "express";
 import { initDb } from "../sequelize/sequelize.mjs";
 import { sequelize } from "../sequelize/sequelize.mjs";
-import { bookRouter } from "./router/routes.mjs"
+import { bookRouter } from "./router/BookRoutes.mjs"
+import { commentRouter } from "./router/CommentRoutes.mjs"
 
 const app = express();
 const port = 3000;
@@ -11,8 +12,7 @@ const port = 3000;
 sequelize.authenticate().then((_) => {
   console.log("Connexion établie");
 }).catch((error) => {
-  console.error(`Impossible de se connecter à la base de donnée ${error}`)
-
+  console.error(`Impossible de se connecter à la base de donnée ${error}`);l
 })
 
 app.use(express.json());
@@ -22,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/book", bookRouter);
+
+app.use("/comment", commentRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
