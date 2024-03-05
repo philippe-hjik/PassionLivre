@@ -22,7 +22,7 @@
 - Configurer les variables d'environnement dans le fichier `.env`
 ```bash
 DB_HOST=localhost
-DB_NAME=db_livre
+DB_NAME=db_library
 DB_USER=root
 DB_PASSWORD=root
 DB_PORT=6033
@@ -30,7 +30,7 @@ DB_PORT=6033
 |  nom de variable  |          utilisation          |
 |-------------------|-------------------------------|
 |`DB_HOST=localhost`| adresse du serveur            |
-|`DB_NAME=db_livre` | nom de la base de données     |
+|`DB_NAME=db_library` | nom de la base de données     |
 |`DB_USER=root`     | nom de l'utilisateur          |
 |`DB_PASSWORD=root` | mot de passe de l'utilisateur |
 |`DB_PORT=6033`     | port de la base de donnée     |
