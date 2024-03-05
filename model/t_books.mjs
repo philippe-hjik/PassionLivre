@@ -85,7 +85,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             }
         },
-        fk_publishers: { // Champ pour la clé étrangère
+        fk_publisher: { // Champ pour la clé étrangère
             type: DataTypes.INTEGER, // Le type doit correspondre à celui de la clé primaire dans la table des auteurs
             allowNull: true,
             references: {
