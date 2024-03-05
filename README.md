@@ -35,15 +35,13 @@ DB_PORT=6033
 |`DB_PASSWORD=root` | mot de passe de l'utilisateur |
 |`DB_PORT=6033`     | port de la base de donnée     |
 
-
-
 <!-- Utilisation -->
 ## Utilisation
 Instructions d'utilisation.
 
 <!-- Contribuer -->
-## Contribuer
-Instructions pour les contributeurs.
+## Contributeur
+<img src="https://contrib.rocks/image?repo=philippe-hjik/PassionLivre">
 
 <!-- License -->
 ## License
