@@ -47,7 +47,7 @@ bookRouter.post('/', (req, res) => {
      });
 });
 
-// Route de update
+// Route de update avec id
 bookRouter.put('/:id', (req, res) => {
     const Id = req.params.id;
     const title_book = req.body.title_book;

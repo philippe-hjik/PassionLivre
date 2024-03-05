@@ -1,30 +1,46 @@
+
+// Importation de express
 import express from "express";
-import { initDb } from "../sequelize/sequelize.mjs";
-import { sequelize } from "../sequelize/sequelize.mjs";
+
+// Permet de créer la base de données sans information avec les models sequelize
+import { initDb, sequelize } from "../sequelize/sequelize.mjs";
+
+// Imporation des routes pour t_books
 import { bookRouter } from "./router/BookRoutes.mjs"
+
+// Imporation des routes pour t_comments
 import { commentRouter } from "./router/CommentRoutes.mjs"
 
 const app = express();
+
+// Port d'écoute
 const port = 3000;
 
-//Iniatialise la db avec le json du mock
+//Iniatialise la db avec les models sequelize
 //initDb();
+
+// Connexion à la base de donnée grâce à sequelize
 sequelize.authenticate().then((_) => {
   console.log("Connexion établie");
 }).catch((error) => {
   console.error(`Impossible de se connecter à la base de donnée ${error}`);l
 })
 
+// Converti les informations de la réponse en json
 app.use(express.json());
 
+// Route principale
 app.get("/", (req, res) => {
   res.send("API REST of self service machine !");
 });
 
+// Routes de t_book commençant à "/book"
 app.use("/book", bookRouter);
 
+// Routes de t_comment commençant à "/comment"
 app.use("/comment", commentRouter);
 
+// Ecoute sur le port pour les incomings request
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });

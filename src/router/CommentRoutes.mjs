@@ -17,6 +17,7 @@ commentRouter.get('/', (req, res) => {
   });
 });
 
+// Route de get avec id
 commentRouter.get('/:id', (req, res) => {
     const Id = req.params.id;
     return comment.findByPk(Id)    
@@ -46,7 +47,7 @@ commentRouter.post('/', (req, res) => {
      });
 });
 
-// Route de update
+// Route de update avec id
 commentRouter.put('/:id', (req, res) => {
     const Id = req.params.id;
     const title_book = req.body.title_book;
