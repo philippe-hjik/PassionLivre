@@ -77,11 +77,10 @@ USE db_library;
 /*
 #################### User Part (db_library) ####################
 */
--- use db_library;
--- CREATE USER IF NOT EXISTS 'adminUser'@'localhost' IDENTIFIED BY 'Pwd5678Etml2024'; 'Pwd5678Etml2024';
--- CREATE ROLE IF NOT EXISTS 'AdminLibrary';
--- GRANT ALL PRIVILEGES ON *.* TO 'AdminLibrary';
--- GRANT 'AdminLibrary' TO 'adminUser'@'localhost';
+
+-- DROP USER 'adminUser'@'localhost';
+-- CREATE USER IF NOT EXISTS 'adminUser'@'localhost' IDENTIFIED BY 'Pwd5678Etml2024';
+-- GRANT ALL PRIVILEGES ON db_library.* TO 'adminUser'@'localhost';
 
 
 /*
