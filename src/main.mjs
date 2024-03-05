@@ -13,6 +13,8 @@ import { commentRouter } from "./router/CommentRoutes.mjs"
 
 import { categoryRouter } from "./router/CategoriesRoutes.mjs";
 
+import { UserRouter } from "./router/UserRoutes.mjs";
+
 const app = express();
 
 // Port d'écoute
@@ -43,6 +45,8 @@ app.use("/book", bookRouter);
 app.use("/comment", commentRouter);
 
 app.use("/categories", categoryRouter);
+
+app.use("/users", UserRouter);
 
 // Ecoute sur le port pour les incomings request
 app.listen(port, () => {

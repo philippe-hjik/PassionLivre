@@ -15,6 +15,9 @@ const userModel = (sequelize, DataTypes) => {
         notNull: {
           msg: "Le nom est une propriété obligatoire.",
         },
+        unique:{
+          msq: "Le nom est déjà pris"
+        }
       },
     },
     password_user: {
