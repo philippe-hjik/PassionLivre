@@ -44,7 +44,6 @@ app.use("/comment", commentRouter);
 
 app.use("/categories", categoryRouter);
 
-
 // Ecoute sur le port pour les incomings request
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
