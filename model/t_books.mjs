@@ -50,7 +50,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        cover: {
+        cover_book: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
