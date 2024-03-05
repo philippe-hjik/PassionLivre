@@ -11,6 +11,8 @@ import { bookRouter } from "./router/BookRoutes.mjs"
 // Imporation des routes pour t_comments
 import { commentRouter } from "./router/CommentRoutes.mjs"
 
+import { categoryRouter } from "./router/CategoriesRoutes.mjs";
+
 const app = express();
 
 // Port d'écoute
@@ -39,6 +41,9 @@ app.use("/book", bookRouter);
 
 // Routes de t_comment commençant à "/comment"
 app.use("/comment", commentRouter);
+
+app.use("/categories", categoryRouter);
+
 
 // Ecoute sur le port pour les incomings request
 app.listen(port, () => {

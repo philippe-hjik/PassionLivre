@@ -1,16 +1,15 @@
 // routes.mjs
-import { Book, category } from "../../sequelize/sequelize.mjs"
-
+import { category } from "../../sequelize/sequelize.mjs"
 import express from 'express';
 
-const bookRouter = express();
+const categoryRouter = express();
 
 // Route de get
-bookRouter.get('/', (req, res) => {
- return Book.findAll()    
- .then((Book) => {
+categoryRouter.get('/', (req, res) => {
+ return category.findAll()    
+ .then((category) => {
     const message = "La liste des livres a bien été récupérée.";
-    res.status(200).json(Book);
+    res.status(200).json(category);
   })
   .catch((error) => {
     const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
@@ -19,12 +18,12 @@ bookRouter.get('/', (req, res) => {
 });
 
 // Route GET avec id
-bookRouter.get('/:id', (req, res) => {
+categoryRouter.get('/:id', (req, res) => {
     const Id = req.params.id;
-    return Book.findByPk(Id)    
-    .then((Book) => {
+    return category.findByPk(Id)    
+    .then((category) => {
        const message = `Le livre dont le livre vaut ${Id}`;
-       res.status(200).json(Book);
+       res.status(200).json(category);
      })
      .catch((error) => {
        const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
@@ -32,33 +31,15 @@ bookRouter.get('/:id', (req, res) => {
     });
 });
 
-bookRouter.get('/:id/categories', (req, res) => {
-  const categorieId = req.params.id;
-
-  return Book.findAll({
-    where: {
-      fk_category: categorieId
-    }
-  }).then((Book) => {
-    const message = `Le livre dont le livre vaut ${categorieId}`;
-    res.status(200).json(Book);
-  })
-  .catch((error) => {
-    const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-    res.status(500).json(message);
- });
-
-});
-
 // Route de post
-bookRouter.post('/', (req, res) => {
+categoryRouter.post('/', (req, res) => {
     const title_book = req.body.title_book;
-    return Book.create({
+    return category.create({
         title_book: title_book
     })
-    .then((Book) => {
+    .then((category) => {
         const message = `Le livre à bien été créé`;
-        res.status(200).json(Book);
+        res.status(200).json(category);
       })
       .catch((error) => {
         const message = `Le livre n'à pas bien été créé Error: ${error}`;
@@ -67,17 +48,17 @@ bookRouter.post('/', (req, res) => {
 });
 
 // Route de update avec id
-bookRouter.put('/:id', (req, res) => {
+categoryRouter.put('/:id', (req, res) => {
     const Id = req.params.id;
     const title_book = req.body.title_book;
 
-    return Book.findByPk(Id).then((Book) => {
-        return Book.update({
+    return category.findByPk(Id).then((category) => {
+        return category.update({
             title_book: title_book
         })
-        .then((Book) => {
+        .then((category) => {
             const message = `Le livre à bien été créé`;
-            res.status(200).json(Book);
+            res.status(200).json(category);
           })
           .catch((error) => {
             const message = `Le livre n'à pas bien été créé Error: ${error}`;
@@ -90,14 +71,14 @@ bookRouter.put('/:id', (req, res) => {
 });
 
 // Route de delete
-bookRouter.delete('/:id', (req, res) => {
+categoryRouter.delete('/:id', (req, res) => {
     const Id = req.params.id;
 
-    return Book.findByPk(Id).then((Book) => {
-        return Book.destroy()
-        .then((Book) => {
+    return category.findByPk(Id).then((category) => {
+        return category.destroy()
+        .then((category) => {
             const message = `Le livre à bien été supprimé avec l'id`;
-            res.status(200).json(Book);
+            res.status(200).json(category);
           })
         .catch((error) => {
             const message = `Le livre n'à pas bien été supprimé Error: ${error}`;
@@ -111,4 +92,4 @@ bookRouter.delete('/:id', (req, res) => {
 
 
 // Exporter le routeur
-export { bookRouter };
+export { categoryRouter };
