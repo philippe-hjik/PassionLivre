@@ -23,7 +23,7 @@ const port = 3000;
 sequelize.authenticate().then((_) => {
   console.log("Connexion établie");
 }).catch((error) => {
-  console.error(`Impossible de se connecter à la base de donnée ${error}`);l
+  console.error(`Impossible de se connecter à la base de donnée ${error}`);
 })
 
 // Converti les informations de la réponse en json
@@ -31,7 +31,7 @@ app.use(express.json());
 
 // Route principale
 app.get("/", (req, res) => {
-  res.send("API REST of self service machine !");
+  res.send("API REST of library");
 });
 
 // Routes de t_book commençant à "/book"
