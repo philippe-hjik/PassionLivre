@@ -1,4 +1,90 @@
 /*
+#################### CREATION PART ####################
+*/
+
+DROP DATABASE IF EXISTS db_library;
+CREATE DATABASE db_library;
+
+USE db_library;
+
+-- CREATE TABLE t_users(
+--    id_user BIGINT AUTO_INCREMENT,
+--    username_user VARCHAR(50),
+--    password_user VARCHAR(50),
+--    nbBooksOffer_user INT,
+--    nbNote_user INT,
+--    nbComment_user VARCHAR(50),
+--    create_at_user DATETIME,
+--    PRIMARY KEY(id_user)
+-- );
+
+-- CREATE TABLE t_authors(
+--    id_author BIGINT AUTO_INCREMENT,
+--    firstName_author VARCHAR(50),
+--    lastName_author VARCHAR(50),
+--    PRIMARY KEY(id_author)
+-- );
+
+-- CREATE TABLE t_categories(
+--    id_category BIGINT AUTO_INCREMENT,
+--    name_category VARCHAR(50),
+--    PRIMARY KEY(id_category)
+-- );
+
+-- CREATE TABLE t_publishers(
+--    id_publisher BIGINT AUTO_INCREMENT,
+--    name_publisher VARCHAR(50),
+--    PRIMARY KEY(id_publisher)
+-- );
+
+-- CREATE TABLE t_books(
+--    id_book BIGINT AUTO_INCREMENT,
+--    title_book VARCHAR(50),
+--    pages_book BIGINT,
+--    extract_book VARCHAR(500),
+--    summary_book VARCHAR(500),
+--    cover_book VARCHAR(128),
+--    year_book INT,
+--    average_book DECIMAL(3,2),
+--    upload_book DATE,
+--    fk_publisher BIGINT NOT NULL,
+--    fk_author BIGINT NOT NULL,
+--    fk_category BIGINT NOT NULL,
+--    fk_user BIGINT NOT NULL,
+--    PRIMARY KEY(id_book),
+--    FOREIGN KEY(fk_publisher) REFERENCES t_publishers(id_publisher),
+--    FOREIGN KEY(fk_author) REFERENCES t_authors(id_author),
+--    FOREIGN KEY(fk_category) REFERENCES t_categories(id_category),
+--    FOREIGN KEY(fk_user) REFERENCES t_users(id_user)
+-- );
+
+-- CREATE TABLE t_comments(
+--    id_comment BIGINT AUTO_INCREMENT,
+--    note_comment INT,
+--    text_comment VARCHAR(255),
+--    fk_book BIGINT NOT NULL,
+--    fk_user BIGINT NOT NULL,
+--    PRIMARY KEY(id_comment),
+--    FOREIGN KEY(fk_book) REFERENCES t_books(id_book),
+--    FOREIGN KEY(fk_user) REFERENCES t_users(id_user)
+-- );
+
+
+
+
+
+
+/*
+#################### User Part (db_library) ####################
+*/
+-- use db_library;
+-- CREATE USER IF NOT EXISTS 'adminUser'@'localhost' IDENTIFIED BY 'Pwd5678Etml2024'; 'Pwd5678Etml2024';
+-- CREATE ROLE IF NOT EXISTS 'AdminLibrary';
+-- GRANT ALL PRIVILEGES ON *.* TO 'AdminLibrary';
+-- GRANT 'AdminLibrary' TO 'adminUser'@'localhost';
+
+
+/*
 #################### Update Part (t_users) ####################
 */
 
@@ -73,12 +159,12 @@ VALUES
 -- Insertion 3
 INSERT INTO t_books (title_book, pages_book, extract_book, summary_book, cover_book, year_book, average_book, upload_book, fk_publisher, fk_author, fk_category, fk_user, created, updatedAt)
 VALUES 
-('Harry Potter à l\'école des sorciers', 332, 'Dans le monde magique, un jeune garçon découvre son héritage et son destin...', 'Harry Potter apprend qu\'il est un sorcier et commence sa première année à Poudlard, une école de sorcellerie.', 'images/harry_potter.jpg', 1997, 4.7, 'livres/harry_potter_a_l_ecole_des_sorciers.pdf', 2, 2, 1, 2, NOW(), NOW());
+("Harry Potter à l'école des sorciers", 332, 'Dans le monde magique, un jeune garçon découvre son héritage et son destin...', "Harry Potter apprend qu\'il est un sorcier et commence sa première année à Poudlard, une école de sorcellerie.", 'images/harry_potter.jpg', 1997, 4.7, 'livres/harry_potter_a_l_ecole_des_sorciers.pdf', 2, 2, 1, 2, NOW(), NOW());
 
 -- Insertion 4
 INSERT INTO t_books (title_book, pages_book, extract_book, summary_book, cover_book, year_book, average_book, upload_book, fk_publisher, fk_author, fk_category, fk_user, created, updatedAt)
 VALUES 
-('Le Petit Prince', 96, 'Un jeune prince voyage à travers les étoiles et rencontre divers personnages...', 'Le Petit Prince découvre l\'amour, l\'amitié et la responsabilité lors de son voyage.', 'images/le_petit_prince.jpg', 1943, 4.9, 'livres/le_petit_prince.pdf', 2, 2, 2, 1, NOW(), NOW());
+('Le Petit Prince', 96, 'Un jeune prince voyage à travers les étoiles et rencontre divers personnages...', "Le Petit Prince découvre l'amour, l'amitié et la responsabilité lors de son voyage.", 'images/le_petit_prince.jpg', 1943, 4.9, 'livres/le_petit_prince.pdf', 2, 2, 2, 1, NOW(), NOW());
 
 
 /*
