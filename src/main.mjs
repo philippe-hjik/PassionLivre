@@ -12,13 +12,13 @@ const port = 3000;
 sequelize.authenticate().then((_) => {
   console.log("Connexion établie");
 }).catch((error) => {
-  console.error(`Impossible de se connecter à la base de donnée ${error}`);l
+  console.error(`Impossible de se connecter à la base de donnée ${error}`);
 })
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("API REST of self service machine !");
+  res.send("API REST of library");
 });
 
 app.use("/book", bookRouter);
