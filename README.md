@@ -9,6 +9,10 @@
   <img src="https://img.shields.io/badge/Built%20with-Node.js-green" alt="Built with Node.js">
   <img src="https://img.shields.io/github/license/philippe-hjik/PassionLivre" alt="License">
 </p>
+<!-- Build with love -->
+<p align="center">
+  <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="Built with Love">
+</p>
 
 <!-- Table of Contents -->
 ## Table des matières
@@ -46,8 +50,3 @@ Instructions d'utilisation.
 <!-- License -->
 ## License
 [MIT License](LICENSE)
-
-<!-- Footer -->
-<p align="center">
-  <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="Built with Love">
-</p>
