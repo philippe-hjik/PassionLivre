@@ -37,7 +37,7 @@ DB_PORT=6033
 |`DB_NAME=db_library` | nom de la base de données     |
 |`DB_USER=root`     | nom de l'utilisateur          |
 |`DB_PASSWORD=root` | mot de passe de l'utilisateur |
-|`DB_PORT=6033`     | port de la base de donnée     |
+|`DB_PORT=6033`     | port de la base de données     |
 
 <!-- Utilisation -->
 ## Utilisation
