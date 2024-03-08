@@ -5,7 +5,7 @@
   "main": "src/main.mjs",
   "scripts": {
     "start": "nodemon src/main.mjs",
-    "test": " unitTest/unitTest.js"
+    "test": "node unitTest/unitTest.js"
   },
   "author": "Philippe Heijkoop",
   "license": "ISC",

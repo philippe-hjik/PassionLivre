@@ -1,6 +1,3 @@
-// Importation des dépendances
-import { sequelize } from "./sequelize/sequelize.mjs"; // Assurez-vous d'ajuster le chemin selon votre structure de dossier
-
 // Fonction de test
 async function testDatabaseConnection() {
   try {
@@ -12,4 +9,6 @@ async function testDatabaseConnection() {
 }
 
 // Exécution du test
-testDatabaseConnection();
+testDatabaseConnection().then(() => {
+  // Vous pouvez ajouter d'autres assertions ici si nécessaire
+});
