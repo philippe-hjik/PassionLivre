@@ -3,19 +3,22 @@
 */
 
 INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
-VALUES ("alomenoud", "1234verySecuredPassword", 1, 1, 1, NOW(), NOW());
+VALUES ("etml", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 0, 0, 0, NOW(), NOW());
 
 INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
-VALUES ("phiheijkoop", "5678notVerySecuredPassword", 1, 1, 1, NOW(), NOW());
+VALUES ("alomenoud", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 1, 1, 1, NOW(), NOW());
 
 INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
-VALUES ("tiasousa", "5873ETML4er", 0, 0, 0, NOW(), NOW());
+VALUES ("phiheijkoop", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 1, 1, 1, NOW(), NOW());
 
 INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
-VALUES ("eviparamanathan", "2736ETML9vg", 0, 0, 0, NOW(), NOW());
+VALUES ("tiasousa", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 0, 0, 0, NOW(), NOW());
 
 INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
-VALUES ("ethschafstall", "8924ETML7ap", 0, 0, 0, NOW(), NOW());
+VALUES ("eviparamanathan", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 0, 0, 0, NOW(), NOW());
+
+INSERT INTO t_users(username_user, password_user, nbBooksOffer_user, nbNote_user, nbComment_user, created, updatedAt) 
+VALUES ("ethschafstall", "$2b$10$TV4DZOedGSlPJO/cj2SBieCBfoL6vlQvQHjtVIbZRot9znafxwtAW", 0, 0, 0, NOW(), NOW());
 
 /*
 #################### Update Part (t_authors) ####################
