@@ -74,15 +74,15 @@ UserRouter.post("/", auth, (req, res) => {
     .then((hash) => {
       data.password_user = hash;
       console.log(data);
-      User.create(req.body)
-      .then((User) => {
-        const message = `L'utilisateur à bien été créé`;
-        return res.status(200).json(success(message, User));
-      })
-      .catch((error) => {
-        const message = `L'utilisateur n'à pas bien été créé Error: ${error}`;
-        return res.status(500).json(success(message, error));
-      });
+      User.create(data)
+        .then((User) => {
+          const message = `L'utilisateur à bien été créé`;
+          return res.status(200).json(success(message, User));
+        })
+        .catch((error) => {
+          const message = `L'utilisateur n'à pas bien été créé Error: ${error}`;
+          return res.status(500).json(success(message, error));
+        });
     });
 });
 

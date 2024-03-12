@@ -54,16 +54,16 @@ bookRouter.put('/:id', auth, (req, res) => {
     return Book.findByPk(Id).then((Book) => {
         return Book.update(req.body)
         .then((Book) => {
-            const message = `Le livre à bien été modifié créé`;
+            const message = `Le livre à bien été modifié`;
             res.status(200).json({message, data:Book});
           })
           .catch((error) => {
-            const message = `Le livre n'à pas bien été créé Error: ${error}`;
+            const message = `Le livre n'à pas bien été modifié Error: ${error}`;
             res.status(500).json(success(message, error));
          });
     }).catch((error) => {
         const message = `L'id ${Id} n'a pas été trouvé`;
-        res.status(500).json(success(message, error));
+        res.status(400).json(success(message, error));
      });
 });
 
@@ -83,7 +83,7 @@ bookRouter.delete('/:id', auth, (req, res) => {
         });
     }).catch((error) => {
         const message = `le livre avec l'id ${Id} n'a pas été trouvé`;
-        res.status(500).json(success(message, error));
+        res.status(400).json(success(message, error));
     });
 });
 
