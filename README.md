@@ -1,7 +1,7 @@
 <!-- Header -->
 <h1 align="center">Passion Livre</h1>
 <p align="center">
-  Description de votre projet.
+  Description de votre projet
 </p>
 
 <!-- Badges -->
