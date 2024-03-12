@@ -1,6 +1,6 @@
 // routes.mjs
 import { Book, category } from "../../sequelize/sequelize.mjs"
-
+import {success} from "../helper.mjs";
 import express from 'express';
 
 const bookRouter = express();
@@ -14,7 +14,7 @@ bookRouter.get('/', (req, res) => {
   })
   .catch((error) => {
     const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-    res.status(500).json(message);
+    res.status(500).json(success(message, error));
   });
 });
 
@@ -24,11 +24,11 @@ bookRouter.get('/:id', (req, res) => {
     return Book.findByPk(Id)    
     .then((Book) => {
        const message = `Le livre dont le livre vaut ${Id}`;
-       res.status(200).json(Book);
+       res.status(200).json(success(Book, message));
      })
      .catch((error) => {
        const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-       res.status(500).json(message);
+       res.status(500).json(success(message, error));
     });
 });
 
@@ -40,52 +40,46 @@ bookRouter.get('/:id/categories', (req, res) => {
       fk_category: categorieId
     }
   }).then((Book) => {
-    const message = `Le livre dont le livre vaut ${categorieId}`;
-    res.status(200).json(Book);
+    const message = `Le livre dont la categories vaut ${categorieId}`;
+    res.status(200).json({message, data:Book});
   })
   .catch((error) => {
     const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-    res.status(500).json(message);
+    res.status(500).json(success(message, error));
  });
 
 });
 
 // Route de post
 bookRouter.post('/', (req, res) => {
-    const title_book = req.body.title_book;
-    return Book.create({
-        title_book: title_book
-    })
+    return Book.create(req.body)
     .then((Book) => {
         const message = `Le livre à bien été créé`;
-        res.status(200).json(Book);
+        res.status(200).json({message, data: Book});
       })
       .catch((error) => {
         const message = `Le livre n'à pas bien été créé Error: ${error}`;
-        res.status(500).json(message);
+        res.status(500).json({message, error});
      });
 });
 
 // Route de update avec id
 bookRouter.put('/:id', (req, res) => {
     const Id = req.params.id;
-    const title_book = req.body.title_book;
 
     return Book.findByPk(Id).then((Book) => {
-        return Book.update({
-            title_book: title_book
-        })
+        return Book.update(req.body)
         .then((Book) => {
-            const message = `Le livre à bien été créé`;
-            res.status(200).json(Book);
+            const message = `Le livre à bien été modifié créé`;
+            res.status(200).json({message, data:Book});
           })
           .catch((error) => {
             const message = `Le livre n'à pas bien été créé Error: ${error}`;
-            res.status(500).json(message);
+            res.status(500).json(success(message, error));
          });
     }).catch((error) => {
         const message = `L'id ${Id} n'a pas été trouvé`;
-        res.status(500).json(message);
+        res.status(500).json(success(message, error));
      });
 });
 
@@ -96,16 +90,16 @@ bookRouter.delete('/:id', (req, res) => {
     return Book.findByPk(Id).then((Book) => {
         return Book.destroy()
         .then((Book) => {
-            const message = `Le livre à bien été supprimé avec l'id`;
-            res.status(200).json(Book);
+            const message = `Le livre avec l'id ${Id} à bien été supprimé`;
+            res.status(200).json({message, data:Book});
           })
         .catch((error) => {
             const message = `Le livre n'à pas bien été supprimé Error: ${error}`;
-            res.status(500).json(message);
+            res.status(500).json(success(message, error));
         });
     }).catch((error) => {
-        const message = `L'id ${Id} du livre n'a pas été trouvé`;
-        res.status(500).json(message);
+        const message = `le livre avec l'id ${Id} n'a pas été trouvé`;
+        res.status(500).json(success(message, error));
     });
 });
 

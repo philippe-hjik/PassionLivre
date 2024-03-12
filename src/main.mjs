@@ -34,19 +34,19 @@ sequelize.authenticate().then((_) => {
 app.use(express.json());
 
 // Route principale
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("API REST of library");
 });
 
 // Routes de t_book commençant à "/book"
-app.use("/book", bookRouter);
+app.use("/api/books", bookRouter);
 
 // Routes de t_comment commençant à "/comment"
-app.use("/comment", commentRouter);
+app.use("/api/comments", commentRouter);
 
-app.use("/categories", categoryRouter);
+app.use("/api/categories", categoryRouter);
 
-app.use("/users", UserRouter);
+app.use("/api/users", UserRouter);
 
 // Ecoute sur le port pour les incomings request
 app.listen(port, () => {

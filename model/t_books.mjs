@@ -21,7 +21,7 @@ const bookModel = (sequelize, DataTypes) => {
         },
         pages_book: {
             type: DataTypes.INTEGER,
-            allowNull: true,
+            allowNull: false,
             validate: {
                 is: {
                     args: /^[0-9]\d+$/,
