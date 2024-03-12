@@ -14,11 +14,11 @@ categoryRouter.get("/", auth, (req, res) => {
   return category
     .findAll()
     .then((category) => {
-      const message = "La liste des livres a bien été récupérée.";
+      const message = "La liste des categories a bien été récupérée.";
       res.status(200).json(success(message,category));
     })
     .catch((error) => {
-      const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
+      const message = `La liste des categories n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
       res.status(500).json(success(message, error));
     });
 });
@@ -29,11 +29,11 @@ categoryRouter.get("/:id", auth, (req, res) => {
   return category
     .findByPk(Id)
     .then((category) => {
-      const message = `Le livre dont le livre vaut ${Id}`;
+      const message = `La categorie dont l'id vaut ${Id}`;
       res.status(200).json(success(message,category));
     })
     .catch((error) => {
-      const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
+      const message = `La categories n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
       res.status(500).json(success(message,error));
     });
 });
@@ -58,7 +58,7 @@ categoryRouter.get("/:id/books", auth, (req, res) => {
         })
         .catch((error) => {
           const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-          res.status(400).json(success(message, error));
+          res.status(500).json(success(message, error));
         });
     })
     .catch((error) => {
@@ -69,17 +69,13 @@ categoryRouter.get("/:id/books", auth, (req, res) => {
 
 // Route de post
 categoryRouter.post("/", auth, (req, res) => {
-  const title_book = req.body.title_book;
-  return category
-    .create({
-      title_book: title_book,
-    })
+  return category.create(req.body)
     .then((category) => {
-      const message = `Le livre à bien été créé`;
+      const message = `La categorie à bien été créé`;
       res.status(200).json(success(message, category));
     })
     .catch((error) => {
-      const message = `Le livre n'à pas bien été créé Error: ${error}`;
+      const message = `La categories n'à pas bien été créé Error: ${error}`;
       res.status(500).json(success(message, error));
     });
 });
@@ -87,27 +83,24 @@ categoryRouter.post("/", auth, (req, res) => {
 // Route de update avec id
 categoryRouter.put("/:id", auth, (req, res) => {
   const Id = req.params.id;
-  const title_book = req.body.title_book;
 
   return category
     .findByPk(Id)
     .then((category) => {
       return category
-        .update({
-          title_book: title_book,
-        })
+        .update(req.body)
         .then((category) => {
-          const message = `Le livre à bien été créé`;
+          const message = `La categorie à bien été modifié`;
           res.status(200).json(success(message, category));
         })
         .catch((error) => {
-          const message = `Le livre n'à pas bien été créé Error: ${error}`;
+          const message = `La categorie n'à pas bien été modifié Error: ${error}`;
           res.status(500).json(success(message, error));
         });
     })
     .catch((error) => {
       const message = `L'id ${Id} n'a pas été trouvé`;
-      res.status(500).json(message);
+      res.status(400).json(message);
     });
 });
 
@@ -121,17 +114,19 @@ categoryRouter.delete("/:id", auth, (req, res) => {
       return category
         .destroy()
         .then((category) => {
-          const message = `Le livre à bien été supprimé avec l'id`;
+          const message = `La categorie à bien été supprimé avec l'id ${Id}`;
           res.status(200).json(success(message, category));
         })
         .catch((error) => {
-          const message = `Le livre n'à pas bien été supprimé Error: ${error}`;
-          res.status(500).json(success(message, error));
+          console.log("tout doux le loup");
+          console.log(error);
+          const message = `La categorie n'à pas bien été supprimé`;
+          res.status(500).json(success(message, error.parent.sqlMessage));
         });
     })
     .catch((error) => {
-      const message = `L'id ${Id} du livre n'a pas été trouvé`;
-      res.status(500).json(success(message, error));
+      const message = `L'id ${Id} de la categorie n'a pas été trouvé`;
+      res.status(400).json(success(message, error));
     });
 });
 

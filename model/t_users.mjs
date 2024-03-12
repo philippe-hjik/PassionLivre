@@ -43,11 +43,12 @@ const userModel = (sequelize, DataTypes) => {
     },
     nbNote_user: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       validate: {
-        min: {
-          args: 1,
-          msg: "La note minimale est 0.",
+        customMin(value) {
+          if (value !== null && value < 0) {
+            throw new Error("La note minimale est 0 ou supérieure.");
+          }
         },
         max: {
             args: 5,
