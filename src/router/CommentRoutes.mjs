@@ -4,8 +4,10 @@ import express from 'express';
 
 const commentRouter = express();
 
+import { auth } from "../auth/auth.mjs";
+
 // Route de get
-commentRouter.get('/', (req, res) => {
+commentRouter.get('/', auth, (req, res) => {
  return comment.findAll()    
  .then((comment) => {
     const message = "La liste des commentaires a bien été récupérée.";
@@ -18,7 +20,7 @@ commentRouter.get('/', (req, res) => {
 });
 
 // Route de get avec id
-commentRouter.get('/:id', (req, res) => {
+commentRouter.get('/:id', auth, (req, res) => {
     const Id = req.params.id;
     return comment.findByPk(Id)    
     .then((comment) => {
@@ -32,7 +34,7 @@ commentRouter.get('/:id', (req, res) => {
 });
 
 // Route de post
-commentRouter.post('/', (req, res) => {
+commentRouter.post('/', auth, (req, res) => {
     const title_book = req.body.title_book;
     return comment.create({
         title_book: title_book
@@ -48,7 +50,7 @@ commentRouter.post('/', (req, res) => {
 });
 
 // Route de update avec id
-commentRouter.put('/:id', (req, res) => {
+commentRouter.put('/:id', auth, (req, res) => {
     const Id = req.params.id;
     const title_book = req.body.title_book;
 
@@ -71,7 +73,7 @@ commentRouter.put('/:id', (req, res) => {
 });
 
 // Route de delete
-commentRouter.delete('/:id', (req, res) => {
+commentRouter.delete('/:id', auth, (req, res) => {
     const Id = req.params.id;
 
     return comment.findByPk(Id).then((comment) => {

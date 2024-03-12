@@ -14,9 +14,6 @@ const userModel = (sequelize, DataTypes) => {
         },
         notNull: {
           msg: "Le nom est une propriété obligatoire.",
-        },
-        unique:{
-          msq: "Le nom est déjà pris"
         }
       },
     },
@@ -46,25 +43,22 @@ const userModel = (sequelize, DataTypes) => {
     },
     nbNote_user: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
-        notEmpty: {
-          msg: "Le nom ne peut pas être vide.",
-        },
-        notNull: {
-          msg: "Le nom est une propriété obligatoire.",
-        },
         min: {
-          args: 0,
+          args: 1,
           msg: "La note minimale est 0.",
         },
         max: {
             args: 5,
             msg: "La note maximale est 5.",
         },
+        notEmpty: {
+          msg: "Le nom ne peut pas être vide.",
+        },
         isInt: {
             msg: "La note doit être un entier.",
-        },
+        }
       },
     },
     nbComment_user: {

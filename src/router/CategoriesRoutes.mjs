@@ -1,41 +1,45 @@
 // routes.mjs
 import { category, Book } from "../../sequelize/sequelize.mjs";
 import express from "express";
+
 import { success } from "../helper.mjs";
+
+import { auth } from "../auth/auth.mjs";
+
 
 const categoryRouter = express();
 
 // Route de get
-categoryRouter.get("/", (req, res) => {
+categoryRouter.get("/", auth, (req, res) => {
   return category
     .findAll()
     .then((category) => {
       const message = "La liste des livres a bien été récupérée.";
-      res.status(200).json(category);
+      res.status(200).json(success(message,category));
     })
     .catch((error) => {
       const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-      res.status(500).json(message);
+      res.status(500).json(success(message, error));
     });
 });
 
 // Route GET avec id
-categoryRouter.get("/:id", (req, res) => {
+categoryRouter.get("/:id", auth, (req, res) => {
   const Id = req.params.id;
   return category
     .findByPk(Id)
     .then((category) => {
       const message = `Le livre dont le livre vaut ${Id}`;
-      res.status(200).json(category);
+      res.status(200).json(success(message,category));
     })
     .catch((error) => {
       const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-      res.status(500).json(message);
+      res.status(500).json(success(message,error));
     });
 });
 
 // tout les livres de cette catégories
-categoryRouter.get("/:id/books", (req, res) => {
+categoryRouter.get("/:id/books", auth, (req, res) => {
   const categoryId = req.params.id;
   let categoryName;
 
@@ -50,21 +54,21 @@ categoryRouter.get("/:id/books", (req, res) => {
       })
         .then((books) => {
           const message = `La liste des livres de la categorie ${categoryName}`;
-          res.status(200).json({ message, data: books });
+          res.status(200).json(success(message, books));
         })
         .catch((error) => {
           const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-          res.status(400).json({ message, error });
+          res.status(400).json(success(message, error));
         });
     })
     .catch((error) => {
       const message = `La categorie ${categoryId} n'existe pas`;
-      return res.status(400).json({ message });
+      return res.status(400).json(success(message, error));
     });
 });
 
 // Route de post
-categoryRouter.post("/", (req, res) => {
+categoryRouter.post("/", auth, (req, res) => {
   const title_book = req.body.title_book;
   return category
     .create({
@@ -72,16 +76,16 @@ categoryRouter.post("/", (req, res) => {
     })
     .then((category) => {
       const message = `Le livre à bien été créé`;
-      res.status(200).json(category);
+      res.status(200).json(success(message, category));
     })
     .catch((error) => {
       const message = `Le livre n'à pas bien été créé Error: ${error}`;
-      res.status(500).json(message);
+      res.status(500).json(success(message, error));
     });
 });
 
 // Route de update avec id
-categoryRouter.put("/:id", (req, res) => {
+categoryRouter.put("/:id", auth, (req, res) => {
   const Id = req.params.id;
   const title_book = req.body.title_book;
 
@@ -94,11 +98,11 @@ categoryRouter.put("/:id", (req, res) => {
         })
         .then((category) => {
           const message = `Le livre à bien été créé`;
-          res.status(200).json(category);
+          res.status(200).json(success(message, category));
         })
         .catch((error) => {
           const message = `Le livre n'à pas bien été créé Error: ${error}`;
-          res.status(500).json(message);
+          res.status(500).json(success(message, error));
         });
     })
     .catch((error) => {
@@ -108,7 +112,7 @@ categoryRouter.put("/:id", (req, res) => {
 });
 
 // Route de delete
-categoryRouter.delete("/:id", (req, res) => {
+categoryRouter.delete("/:id", auth, (req, res) => {
   const Id = req.params.id;
 
   return category
@@ -118,16 +122,16 @@ categoryRouter.delete("/:id", (req, res) => {
         .destroy()
         .then((category) => {
           const message = `Le livre à bien été supprimé avec l'id`;
-          res.status(200).json(category);
+          res.status(200).json(success(message, category));
         })
         .catch((error) => {
           const message = `Le livre n'à pas bien été supprimé Error: ${error}`;
-          res.status(500).json(message);
+          res.status(500).json(success(message, error));
         });
     })
     .catch((error) => {
       const message = `L'id ${Id} du livre n'a pas été trouvé`;
-      res.status(500).json(message);
+      res.status(500).json(success(message, error));
     });
 });
 

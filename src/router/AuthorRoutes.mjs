@@ -3,10 +3,12 @@ import { Book, author } from "../../sequelize/sequelize.mjs";
 import { success } from "../helper.mjs";
 import express from "express";
 
+import { auth } from "../auth/auth.mjs";
+
 const authorRouter = express();
 
 // Route de get
-authorRouter.get("/", (req, res) => {
+authorRouter.get("/", auth, (req, res) => {
   return author
     .findAll()
     .then((author) => {
@@ -20,7 +22,7 @@ authorRouter.get("/", (req, res) => {
 });
 
 // Route GET avec id
-authorRouter.get("/:id", (req, res) => {
+authorRouter.get("/:id", auth, (req, res) => {
   const Id = req.params.id;
   return author
     .findByPk(Id)
@@ -35,7 +37,7 @@ authorRouter.get("/:id", (req, res) => {
 });
 
 // obtenir tout les livres de cet auteur
-authorRouter.get("/:id/books", (req, res) => {
+authorRouter.get("/:id/books", auth, (req, res) => {
   const authorId = req.params.id;
   let firstName_author;
 
@@ -62,7 +64,7 @@ authorRouter.get("/:id/books", (req, res) => {
 });
 
 // Route de post
-authorRouter.post("/", (req, res) => {
+authorRouter.post("/", auth, (req, res) => {
   return author
     .create(req.body)
     .then((author) => {
@@ -76,7 +78,7 @@ authorRouter.post("/", (req, res) => {
 });
 
 // Route de update avec id
-authorRouter.put("/:id", (req, res) => {
+authorRouter.put("/:id", auth, (req, res) => {
   const Id = req.params.id;
 
   return author
@@ -100,7 +102,7 @@ authorRouter.put("/:id", (req, res) => {
 });
 
 // Route de delete
-authorRouter.delete("/:id", (req, res) => {
+authorRouter.delete("/:id", auth, (req, res) => {
   const Id = req.params.id;
 
   return author

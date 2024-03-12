@@ -70,19 +70,8 @@ const importBooks = () => {
       }).then((bookData) => console.log(bookData.toJSON()));
     });
 };
-
-const importUsers = () => {
-  bcrypt
-    .hash("etml", 10) // temps pour hasher = du sel
-    .then((hash) =>
-      User.create({
-        username: "etml",
-        password: hash,
-      })
-    )
-    .then((user) => console.log(user.toJSON()));
-};
 */
+
 // Exportation de la structure de la base de donnée pour créer les routes,
 // la synchro de la db et les informations de connexion à la db à l'aide de sequelize
 export { sequelize, initDb, Book, User, author, category, comment, publisher};

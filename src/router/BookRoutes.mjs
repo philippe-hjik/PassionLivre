@@ -3,10 +3,12 @@ import { Book, category } from "../../sequelize/sequelize.mjs"
 import {success} from "../helper.mjs";
 import express from 'express';
 
+import { auth } from "../auth/auth.mjs";
+
 const bookRouter = express();
 
 // Route de get
-bookRouter.get('/', (req, res) => {
+bookRouter.get('/', auth, (req, res) => {
  return Book.findAll()    
  .then((Book) => {
     const message = "La liste des livres a bien été récupérée.";
@@ -19,7 +21,7 @@ bookRouter.get('/', (req, res) => {
 });
 
 // Route GET avec id
-bookRouter.get('/:id', (req, res) => {
+bookRouter.get('/:id', auth, (req, res) => {
     const Id = req.params.id;
     return Book.findByPk(Id)    
     .then((Book) => {
@@ -33,7 +35,7 @@ bookRouter.get('/:id', (req, res) => {
 });
 
 // Route de post
-bookRouter.post('/', (req, res) => {
+bookRouter.post('/', auth, (req, res) => {
     return Book.create(req.body)
     .then((Book) => {
         const message = `Le livre à bien été créé`;
@@ -46,7 +48,7 @@ bookRouter.post('/', (req, res) => {
 });
 
 // Route de update avec id
-bookRouter.put('/:id', (req, res) => {
+bookRouter.put('/:id', auth, (req, res) => {
     const Id = req.params.id;
 
     return Book.findByPk(Id).then((Book) => {
@@ -66,7 +68,7 @@ bookRouter.put('/:id', (req, res) => {
 });
 
 // Route de delete
-bookRouter.delete('/:id', (req, res) => {
+bookRouter.delete('/:id', auth, (req, res) => {
     const Id = req.params.id;
 
     return Book.findByPk(Id).then((Book) => {
