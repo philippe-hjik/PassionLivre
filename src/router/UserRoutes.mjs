@@ -1,5 +1,5 @@
 // routes.mjs
-import { User } from "../../sequelize/sequelize.mjs"
+import { User, Book } from "../../sequelize/sequelize.mjs"
 
 import express from 'express';
 
@@ -31,6 +31,35 @@ UserRouter.get('/:id', (req, res) => {
        res.status(500).json(message);
     });
 });
+
+// obtenir tout les livres selon l'utilisateur
+UserRouter.get("/:id/books", (req, res) => {
+  const UserId = req.params.id;
+  let firstName_User;
+
+  User
+    .findByPk(UserId)
+    .then((User) => {
+      firstName_User = `${User.username_user}`;
+      return Book.findAll({
+        where: {
+          fk_User: UserId,
+        },
+      }).then((books) => {
+        const message = `La liste des livres de L'utilisateur ${firstName_User}`;
+        res.status(200).json({ message, data: books });
+      })
+      .catch((error) => {
+        const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
+        res.status(400).json({ message, error });
+      });
+    })
+    .catch((error) => {
+      const message = `L'utilisateur ${UserId} n'existe pas`;
+      return res.status(400).json({ message, error });
+    });
+});
+
 
 // Route de post
 UserRouter.post('/', (req, res) => {

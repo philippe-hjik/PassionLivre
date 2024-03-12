@@ -32,24 +32,6 @@ bookRouter.get('/:id', (req, res) => {
     });
 });
 
-bookRouter.get('/:id/categories', (req, res) => {
-  const categorieId = req.params.id;
-
-  return Book.findAll({
-    where: {
-      fk_category: categorieId
-    }
-  }).then((Book) => {
-    const message = `Le livre dont la categories vaut ${categorieId}`;
-    res.status(200).json({message, data:Book});
-  })
-  .catch((error) => {
-    const message = `La liste des livres n'a pas pu être récupérée. Merci de réessayer dans quelques instants. ${error}`;
-    res.status(500).json(success(message, error));
- });
-
-});
-
 // Route de post
 bookRouter.post('/', (req, res) => {
     return Book.create(req.body)
