@@ -36,7 +36,7 @@ const commentModel = (sequelize, DataTypes) => {
             allowNull: false,
             references: {
               model: 't_books', // Nom de la table que vous référencez
-              key: 'id_book' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'CASCADE'
@@ -46,7 +46,7 @@ const commentModel = (sequelize, DataTypes) => {
             allowNull: false,
             references: {
               model: 't_users', // Nom de la table que vous référencez
-              key: 'id_user' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'CASCADE'

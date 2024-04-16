@@ -1,18 +1,17 @@
 import { DataTypes, Sequelize } from "sequelize";
 
 import { bookModel } from "../model/t_books.mjs";
-import { authorModel } from "../model/t_authors.mjs"
-import { categoryModel } from "../model/t_categories.mjs"
-import { commentModel } from "../model/t_comments.mjs"
-import { publisherModel } from "../model/t_publishers.mjs"
+import { authorModel } from "../model/t_authors.mjs";
+import { categoryModel } from "../model/t_categories.mjs";
+import { commentModel } from "../model/t_comments.mjs";
+import { publisherModel } from "../model/t_publishers.mjs";
 import { userModel } from "../model/t_users.mjs";
 
 // Permet d'utiliser des variables d'environnement
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 // Charge les variables d'environnement dans le processus d'application
 dotenv.config();
-
 
 // Importation du cryptage d'information
 //import { hash, bcrypt } from "bcrypt";
@@ -42,36 +41,20 @@ let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncronisation dans la db et écrase ce qui était présent avant
     .then((_) => {
-        //Ajout de mocks ici pour remplir la db
-       //importBooks();
+      //Ajout de mocks ici pour remplir la db
+      //importBooks();
       //importUsers();
     });
 };
 
 // Remplissage de la base de données avec des mocks
 /*
-const importBooks = () => {
-    bookData.map((bookData) => {
-        Book.create({
-            id: bookData.id,
-            title: bookData.title,
-            categorie: bookData.categorie,
-            nbPages: bookData.nbPages,
-            extrait: bookData.extrait,
-            resume: bookData.resume,
-            authorFirstName: bookData.authorFirstName,
-            authorLastName: bookData.authorLastName,
-            editorFirstName: bookData.editorFirstName,
-            editorLastName: bookData.editorLastName,
-            editionYear: bookData.editionYear,
-            avgAppreciation: bookData.avgAppreciation,
-            comments: bookData.comments,
-            cover: bookData.cover
-      }).then((bookData) => console.log(bookData.toJSON()));
-    });
+const importUsers = () => {
+  User.create({
+
+  }).then((bookData) => console.log(bookData.toJSON()));
 };
 */
-
 // Exportation de la structure de la base de donnée pour créer les routes,
 // la synchro de la db et les informations de connexion à la db à l'aide de sequelize
-export { sequelize, initDb, Book, User, author, category, comment, publisher};
+export { sequelize, initDb, Book, User, author, category, comment, publisher };

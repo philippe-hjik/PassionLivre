@@ -90,7 +90,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             references: {
               model: 't_publishers', // Nom de la table que vous référencez
-              key: 'id_publisher' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -100,7 +100,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             references: {
               model: 't_authors', // Nom de la table que vous référencez
-              key: 'id_author' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -110,7 +110,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             references: {
               model: 't_categories', // Nom de la table que vous référencez
-              key: 'id_category' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
@@ -120,7 +120,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             references: {
               model: 't_users', // Nom de la table que vous référencez
-              key: 'id_user' // Nom de la colonne que vous référencez dans la table des auteurs
+              key: 'id' // Nom de la colonne que vous référencez dans la table des auteurs
             },
             onUpdate: 'CASCADE', // Options pour le comportement de mise à jour et de suppression
             onDelete: 'RESTRICT'
