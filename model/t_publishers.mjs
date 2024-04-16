@@ -2,12 +2,12 @@ const publisherModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "t_publishers",
       {
-        id_publisher: {
+        id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        name_publisher: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

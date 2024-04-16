@@ -2,12 +2,12 @@ const categoryModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "t_categories",
       {
-        id_category: {
+        id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        name_category: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

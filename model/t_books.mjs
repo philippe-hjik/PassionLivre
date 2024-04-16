@@ -2,12 +2,12 @@ const bookModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "t_books",
       {
-        id_book: {
+        id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        title_book: {
+        title: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
@@ -19,7 +19,7 @@ const bookModel = (sequelize, DataTypes) => {
             },
           },
         },
-        pages_book: {
+        pages: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
@@ -32,7 +32,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        extract_book: {
+        extract: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
@@ -41,7 +41,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        summary_book: {
+        summary: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
@@ -50,7 +50,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        cover_book: {
+        cover: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
@@ -59,7 +59,7 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             }
         },
-        year_book: {
+        year: {
             type: DataTypes.INTEGER,
             allowNull: true,
             validate: {
@@ -72,11 +72,11 @@ const bookModel = (sequelize, DataTypes) => {
                 },
             }
         },
-        average_book: {
+        average: {
             type: DataTypes.FLOAT,
             allowNull: true,
         },
-        upload_book: {
+        upload: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {

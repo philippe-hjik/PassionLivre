@@ -2,12 +2,12 @@ const commentModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "t_comments",
       {
-        id_comment: {
+        id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        note_comment: {
+        note: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -19,7 +19,7 @@ const commentModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        text_comment: {
+        text: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

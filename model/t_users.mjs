@@ -1,11 +1,11 @@
 const userModel = (sequelize, DataTypes) => {
   return sequelize.define("t_users", {
-    id_user: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    username_user: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -17,7 +17,7 @@ const userModel = (sequelize, DataTypes) => {
         }
       },
     },
-    password_user: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -29,7 +29,7 @@ const userModel = (sequelize, DataTypes) => {
         },
       },
     },
-    nbBooksOffer_user: {
+    nbBooksOffer: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -41,7 +41,7 @@ const userModel = (sequelize, DataTypes) => {
         },
       },
     },
-    nbNote_user: {
+    nbNote: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -62,7 +62,7 @@ const userModel = (sequelize, DataTypes) => {
         }
       },
     },
-    nbComment_user: {
+    nbComment: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {

@@ -2,12 +2,12 @@ const authorModel = (sequelize, DataTypes) => {
     return sequelize.define(
       "t_authors",
       {
-        id_author: {
+        id: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        firstName_author: {
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -19,7 +19,7 @@ const authorModel = (sequelize, DataTypes) => {
                 },
             },
         },
-        lastName_author: {
+        lastName: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
