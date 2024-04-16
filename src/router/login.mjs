@@ -34,7 +34,7 @@ loginRouter.post("/", (req, res) => {
     })
     .catch((error) => {
       const message = `L'utilisateur n'a pas pu être connecté. Réessayez dans quelques instants`;
-      return res.json({ message, data: error });
+      return res.status(400).json({ message, data: error });
     });
 });
 export { loginRouter };
