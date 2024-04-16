@@ -23,10 +23,10 @@ import { authorRouter } from "./router/AuthorRoutes.mjs";
 // routeur login
 import { loginRouter } from "./router/login.mjs";
 
-/* swagger à faire
+// swagger à faire
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.mjs";
-*/
+
 const app = express();
 
 // Port d'écoute
@@ -65,7 +65,7 @@ app.use("/api/authors", authorRouter);
 app.use("/api/login", loginRouter);
 
 // swagger route
-//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
 // Ecoute sur le port pour les incomings request
 app.listen(port, () => {

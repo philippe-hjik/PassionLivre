@@ -12,10 +12,10 @@ const bookModel = (sequelize, DataTypes) => {
           allowNull: false,
           validate: {
             notEmpty: {
-              msg: "Le nom ne peut pas être vide.",
+              msg: "Le titre ne peut pas être vide.",
             },
             notNull: {
-              msg: "Le nom est une propriété obligatoire.",
+              msg: "Le titre est une propriété obligatoire.",
             },
           },
         },
@@ -28,7 +28,7 @@ const bookModel = (sequelize, DataTypes) => {
                     msg: "Seules les lettres et les espaces sont autorisées.",
                 },
                 notEmpty: {
-                  msg: "Le nom ne peut pas être vide.",
+                  msg: "Le nombre de pages ne peut pas être vide.",
                 },
             },
         },
@@ -37,7 +37,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 notEmpty: {
-                  msg: "Le nom ne peut pas être vide.",
+                  msg: "L'extrait ne peut pas être vide.",
                 },
             },
         },
@@ -46,7 +46,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 notEmpty: {
-                  msg: "Le nom ne peut pas être vide.",
+                  msg: "Le résumé ne peut pas être vide.",
                 },
             },
         },
@@ -55,7 +55,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 notEmpty: {
-                    msg: "Le nom ne peut pas être vide.",
+                    msg: "La couverture du livre ne peut pas être vide.",
                 },
             }
         },
@@ -68,7 +68,7 @@ const bookModel = (sequelize, DataTypes) => {
                     msg: "Seules les chiffre et les espaces sont autorisées.",
                 },
                 notEmpty: {
-                  msg: "Le nom ne peut pas être vide.",
+                  msg: "L'année ne peut pas être vide.",
                 },
             }
         },
@@ -81,7 +81,7 @@ const bookModel = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 notEmpty: {
-                    msg: "Le nom ne peut pas être vide.",
+                    msg: "Le nombre ne peut pas être vide.",
                 },
             }
         },
