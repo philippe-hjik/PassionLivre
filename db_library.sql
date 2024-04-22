@@ -1,3 +1,4 @@
+/*
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -11,6 +12,7 @@ USE `db_library`;
 
 DROP TABLE IF EXISTS `t_users`;
 CREATE TABLE `t_users` ( `id` int PRIMARY KEY AUTO_INCREMENT, `username` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `nbBooksOffer` int, `nbNote` int, `nbComment` int, `created` datetime, `updatedAt` datetime );ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+*/
 
 /*
 #################### Update Part (t_users) ####################
