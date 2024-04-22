@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-for="book in responseData">
+    <div v-for="book in latestBooks">
       <h1>{{ book.title }}</h1>
       <p>{{ book.summary }}</p>
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'; // Importer ref et onMounted depuis Vue
+import { ref, onMounted, computed } from 'vue'; // Importer ref et onMounted depuis Vue
 
 import axios from 'axios';
 
@@ -31,9 +31,16 @@ export default {
         });
     });
 
-    // Retournez les réactifs que vous souhaitez exposer
+    // Créez une propriété calculée pour obtenir les 5 derniers livres
+    const latestBooks = computed(() => {
+      return responseData.value
+        .sort((a, b) => new Date(b.created) - new Date(a.created)) // Triez par date de création décroissante
+        .slice(0, 5); // Limitez aux 5 premiers livres
+    });
+
+    // Retournez les réactifs et les propriétés calculées que vous souhaitez exposer
     return {
-      responseData
+      latestBooks
     };
   }
 }
