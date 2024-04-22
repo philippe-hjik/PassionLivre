@@ -1,6 +1,7 @@
 
 // Importation de express
 import express from "express";
+import cors from "cors";
 
 // Permet de créer la base de données sans information avec les models sequelize
 import { initDb, sequelize } from "../sequelize/sequelize.mjs";
@@ -44,6 +45,7 @@ sequelize.authenticate().then((_) => {
 
 // Converti les informations de la réponse en json
 app.use(express.json());
+app.use(cors());
 
 // Route principale
 app.get("/api", (req, res) => {

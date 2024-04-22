@@ -8,7 +8,7 @@ import { auth } from "../auth/auth.mjs";
 const bookRouter = express();
 
 // Route de get
-bookRouter.get('/', auth, (req, res) => {
+bookRouter.get('/', (req, res) => {
  return Book.findAll()    
  .then((Book) => {
     const message = "La liste des livres a bien été récupérée.";
