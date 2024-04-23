@@ -35,6 +35,7 @@ export default {
       items: [
         {
           label: 'Home',
+          icon: 'pi pi-home'
         },
         {
           label: 'Features',
