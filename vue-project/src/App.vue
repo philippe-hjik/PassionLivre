@@ -1,38 +1,44 @@
 <template>
-  <header>
-
-  </header>
+  <div class="card">
+    <Menubar :model="items" />
+  </div>
 
   <body>
-    <div style="display: flex; flex-direction: column">
+    <div style="display: flex;">
       <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
       <div v-else style="display: flex;">
-        <bookCard :dataTrue="dataTrue"></bookCard>
-        <bookCard :dataTrue="dataTrue"></bookCard>
-        <bookCard :dataTrue="dataTrue"></bookCard>
-        <bookCard :dataTrue="dataTrue"></bookCard>
+        <bookCard v-for="n in 5" :dataTrue="dataTrue"></bookCard>
         <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
       </div>
     </div>
   </body>
-  <footer>
 
-  </footer>
 </template>
 
 <script>
 import axios from 'axios';
 import bookCard from '../components/bookCard.vue';
+import Button from 'primevue/button';
+import Menubar from 'primevue/menubar';
 
 export default {
   components: {
-    bookCard
+    bookCard,
+    Button,
+    Menubar
   },
   data() {
     return {
       // Initialiser bookData à null ou à un objet vide
       bookData: null,
-      dataTrue: 0
+      dataTrue: 0,
+      items: [
+        {
+          label: 'Home',
+        },
+        {
+          label: 'Features',
+        }]
     };
   },
   mounted() {
