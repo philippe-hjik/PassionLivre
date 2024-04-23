@@ -1,47 +1,64 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
   </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <body>
+    <div style="display: flex; flex-direction: column">
+      <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
+      <div v-else style="display: flex;">
+        <bookCard :dataTrue="dataTrue"></bookCard>
+        <bookCard :dataTrue="dataTrue"></bookCard>
+        <bookCard :dataTrue="dataTrue"></bookCard>
+        <bookCard :dataTrue="dataTrue"></bookCard>
+        <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
+      </div>
+    </div>
+  </body>
+  <footer>
+
+  </footer>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script>
+import axios from 'axios';
+import bookCard from '../components/bookCard.vue';
+
+export default {
+  components: {
+    bookCard
+  },
+  data() {
+    return {
+      // Initialiser bookData à null ou à un objet vide
+      bookData: null,
+      dataTrue: 0
+    };
+  },
+  mounted() {
+    // Effectuer la requête Axios pour récupérer les données du livre
+    axios.get('http://localhost:3000/api/books')
+      .then(response => {
+        // Trier les livres par ordre décroissant de leur date de création
+        const sortedBooks = response.data.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+        // Prendre les 5 premiers livres du tableau trié
+        const lastFiveBooks = sortedBooks.slice(0, 5);
+
+        // Mettre à jour bookData avec les données des 5 derniers livres
+        this.bookData = lastFiveBooks;
+        this.dataTrue = 1;
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des données du livre:', error);
+        this.dataTrue = 0;
+      });
+  }
 }
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+body {
+  background-color: #f8fafc;
 }
 </style>
