@@ -3,16 +3,10 @@
     <h1>Login</h1>
     <div class="w-full" style="max-width: 40rem;">
       <div class="field">
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-user" />
-          </InputIcon>
-
           <FloatLabel>
             <InputText id="input" v-model="name" type="text" autofocus />
             <label for="username">Username</label>
           </FloatLabel>
-        </IconField>
       </div>
       <div class="field">
 
@@ -73,7 +67,7 @@ export default {
 }
 
 .field {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 p {
