@@ -17,7 +17,7 @@ const routes = [
     path: "/book",
     name: "book",
     component: Login,
-    meta: { requiresAuth: true }
+    //meta: { requiresAuth: true }
   },
 ];
 

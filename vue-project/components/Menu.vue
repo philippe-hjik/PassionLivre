@@ -26,7 +26,15 @@ export default {
         {
           label: 'Book',
           icon: 'pi pi-book',
-          url: '/book'
+          items: [
+            {
+                label: 'Nouveau Livre',
+                icon: 'pi pi-plus-circle'
+            },
+            {
+                label: 'Blocks',
+                icon: 'pi pi-server'
+            }]
         }]
     };
   }
