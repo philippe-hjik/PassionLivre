@@ -26,7 +26,7 @@ export default {
         {
           label: 'Book',
           icon: 'pi pi-book',
-          url: '/'
+          url: '/book'
         }]
     };
   }
