@@ -2,7 +2,7 @@
     <body>
       <div style="display: flex;">
         <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
-        <div v-else style="display: flex;">
+        <div v-else style="display: flex; flex-wrap: wrap;">
           <bookCard v-for="n in 5" :dataTrue="dataTrue"></bookCard>
           <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
         </div>
