@@ -22,6 +22,11 @@ export default {
           label: 'Login',
           icon: 'pi pi-user',
           url: '/login'
+        },
+        {
+          label: 'Book',
+          icon: 'pi pi-book',
+          url: '/'
         }]
     };
   }
