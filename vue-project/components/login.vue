@@ -11,16 +11,12 @@
       <div class="field">
 
         <FloatLabel>
-          <Password v-model="password" inputId="password" toggleMask />
+          <Password v-model="password" inputId="password" :feedback="false" toggleMask />
           <label for="password">Password</label>
         </FloatLabel>
 
       </div>
-      <div class="field-checkbox" style="margin-top: 15px;">
-        <Checkbox id="accept" style="margin-right: 10px;" v-model="accept" name="accept" value="Accept" />
-        <label for="accept">I agree to the terms and conditions.</label>
-      </div>
-      <Button type="submit" label="S'inscrire" style="margin-top: 15px;" class="mt-2" severity="secondary"   />
+      <Button type="submit" label="S'inscrire" class="mt-2" severity="secondary"   />
       <Button type="submit" label="Se connecter" style="margin-top: 15px;" class="mt-2" raised />
     </div>
   </div>
