@@ -1,0 +1,177 @@
+<template>
+
+    <body>
+        <div class="card">
+            <Toolbar>
+                <template #start>
+                    <Button icon="pi pi-plus" class="mr-2" severity="secondary" />
+                    <Button icon="pi pi-pencil" class="mr-2" severity="secondary" />
+                    <Button icon="pi pi-upload" severity="secondary" />
+                </template>
+
+                <template #center>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <i class="pi pi-search" />
+                        </InputIcon>
+                        <InputText placeholder="Search" />
+                    </IconField>
+                    <Dropdown v-model="selectedCategory" :options="categories" filter optionLabel="name"
+                        placeholder="Select categories" class="w-full md:w-14rem" multiple>
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value" class="flex align-items-center">
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="flex align-items-center">
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
+
+                </template>
+
+                <template #end>
+                    <SplitButton label="Save" :model="items">
+                    </SplitButton>
+                </template>
+            </Toolbar>
+        </div>
+        <div style="display: flex; flex-wrap: wrap;">
+            <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
+            <div v-else style="display: flex; flex-wrap: wrap;">
+                <bookCard v-for="n in 10" :dataTrue="dataTrue"></bookCard>
+                <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
+            </div>
+        </div>
+    </body>
+</template>
+
+<script>
+import axios from 'axios';
+import bookCard from '../components/bookCard.vue';
+
+import Toolbar from 'primevue/toolbar';
+import TreeSelect from 'primevue/treeselect';
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import IconField from 'primevue/iconfield';
+import InputIcon from 'primevue/inputicon';
+import SplitButton from 'primevue/splitbutton';
+import Dropdown from 'primevue/dropdown';
+
+
+
+export default {
+    components: {
+        bookCard,
+        TreeSelect,
+        Toolbar,
+        InputText,
+        IconField,
+        InputIcon,
+        Button,
+        SplitButton,
+        Dropdown
+    },
+    data() {
+        return {
+            // Initialiser bookData à null ou à un objet vide
+            bookData: null,
+            dataTrue: 0,
+            nodes: null,
+            selectedValue: null,
+            selectedCategory: null,
+            categories: [
+                { name: 'Roman' },
+                { name: 'Nouvelle' },
+                { name: 'Science-fiction' },
+                { name: 'Fantaisie' },
+                { name: 'Policier' },
+                { name: 'Thriller' },
+                { name: 'Romance' },
+                { name: 'Littérature classique' },
+                { name: 'Biographie' },
+                { name: 'Mémoires' },
+                { name: 'Histoire' },
+                { name: 'Politique' },
+                { name: 'Sciences' },
+                { name: 'Psychologie' },
+                { name: 'Développement personnel' },
+                { name: 'Voyage' },
+                { name: 'Cuisine' },
+                { name: 'Art et photographie' },
+                { name: 'Poésie' },
+                { name: 'Théâtre' },
+                { name: 'Bandes dessinées / Comics' },
+                { name: 'Livres académiques / Universitaires' },
+                { name: 'Livres religieux / Spirituels' },
+                { name: 'Hard science-fiction' },
+                { name: 'Space opera' },
+                { name: 'Dystopie' },
+                { name: 'Uchronie' },
+                { name: 'High fantasy' },
+                { name: 'Low fantasy' },
+                { name: 'Fantaisie urbaine' },
+                { name: 'Fantaisie historique' },
+                { name: 'Enquêtes classiques' },
+                { name: 'Polars nordiques' },
+                { name: 'Polars historiques' },
+                { name: 'Thrillers psychologiques' },
+                { name: 'Romance contemporaine' },
+                { name: 'Romance historique' },
+                { name: 'Romance érotique' },
+                { name: 'Romance fantastique' },
+                { name: 'Œuvres antiques' },
+                { name: 'Classiques français' },
+                { name: 'Classiques anglais' },
+                { name: 'Classiques russes' },
+                { name: 'Physique' },
+                { name: 'Chimie' },
+                { name: 'Biologie' },
+                { name: 'Astronomie' },
+                { name: 'Psychologie clinique' },
+                { name: 'Psychologie sociale' },
+                { name: 'Psychologie du développement' },
+                { name: 'Psychologie cognitive' },
+                { name: 'Récits de voyage' },
+                { name: 'Guides de voyage' },
+                { name: 'Aventures de voyage' },
+                { name: 'Recettes du monde' },
+                { name: 'Cuisine régionale' },
+                { name: 'Cuisine santé' },
+                { name: 'Cuisine gastronomique' },
+                { name: 'Histoire de l\'art'},
+                { name: 'Techniques artistiques' },
+                { name: 'Photographie de paysage' },
+                { name: 'Photographie documentaire' }
+            ]
+        };
+    },
+    mounted() {
+        // Effectuer la requête Axios pour récupérer les données du livre
+        axios.get('http://localhost:3000/api/books')
+            .then(response => {
+                // Trier les livres par ordre décroissant de leur date de création
+                const sortedBooks = response.data.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+                // Prendre les 5 premiers livres du tableau trié
+                const lastFiveBooks = sortedBooks.slice(0, 5);
+
+                // Mettre à jour bookData avec les données des 5 derniers livres
+                this.bookData = lastFiveBooks;
+                this.dataTrue = 1;
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des données du livre:', error);
+                this.dataTrue = 0;
+            });
+    }
+}
+</script>
+
+<style scoped></style>

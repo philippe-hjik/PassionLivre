@@ -32,8 +32,9 @@ export default {
                 icon: 'pi pi-plus-circle'
             },
             {
-                label: 'Blocks',
-                icon: 'pi pi-server'
+                label: 'Recherche',
+                icon: 'pi pi-search',
+                url: '/book'
             }]
         }]
     };

@@ -48,8 +48,6 @@
   </script>
   
   <style scoped>
-  body {
-    background-color: #f8fafc;
-  }
+
   </style>
   

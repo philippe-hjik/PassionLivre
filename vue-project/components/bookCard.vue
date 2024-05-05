@@ -1,5 +1,5 @@
 <template>
-  <Card style="width: 25rem; overflow: hidden; margin: 5px;">
+  <Card style="width: 100%; overflow: hidden; margin: 5px;">
     <template #title>
       <Skeleton width="100%" height="8rem" v-if="!dataTrue" />
       <template v-else>{{ book.title }}</template>

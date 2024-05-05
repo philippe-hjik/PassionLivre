@@ -1,28 +1,5 @@
 <template>
-  <div class="card flex justify-content-center align-items-center p-fluid">
-    <h1 style="margin-top: 0;">Login</h1>
-    <div class="w-full" style="max-width: 25rem;">
-      <div class="field">
-        <FloatLabel>
-          <InputText id="input" v-model="name" type="text" autofocus />
-          <label for="username">Username</label>
-        </FloatLabel>
-      </div>
-      <div class="field">
-
-        <FloatLabel>
-          <Password v-model="password" inputId="password" :feedback="false" toggleMask />
-          <label for="password">Password</label>
-        </FloatLabel>
-
-      </div>
-      <Button type="submit" label="S'inscrire" class="mt-2, field" severity="secondary" />
-      <Button type="submit" label="Se connecter" class="mt-2, field" raised @click="sendLogin()" />
-
-    </div>
-    <Message v-if="connected" severity="success">{{ message }}</Message>
-    <Message v-else-if="connected == false" severity="error">{{ message }}</Message>
-  </div>
+  
 </template>
 
 <script>
@@ -33,7 +10,6 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import FloatLabel from 'primevue/floatlabel';
 import Message from 'primevue/message';
-
 import axios from 'axios';
 
 export default {
@@ -115,7 +91,6 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--surface-card);
 }
 
 .field {
