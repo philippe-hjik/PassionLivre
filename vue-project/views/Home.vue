@@ -1,6 +1,6 @@
 <template>
     <body>
-      <div style="display: flex;">
+      <div style="display: flex; flex-wrap: wrap;">
         <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
         <div v-else style="display: flex; flex-wrap: wrap;">
           <bookCard v-for="n in 5" :dataTrue="dataTrue"></bookCard>
