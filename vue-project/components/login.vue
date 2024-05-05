@@ -3,10 +3,10 @@
     <h1>Login</h1>
     <div class="w-full" style="max-width: 40rem;">
       <div class="field">
-          <FloatLabel>
-            <InputText id="input" v-model="name" type="text" autofocus />
-            <label for="username">Username</label>
-          </FloatLabel>
+        <FloatLabel>
+          <InputText id="input" v-model="name" type="text" autofocus />
+          <label for="username">Username</label>
+        </FloatLabel>
       </div>
       <div class="field">
 
@@ -16,8 +16,8 @@
         </FloatLabel>
 
       </div>
-      <Button type="submit" label="S'inscrire" class="mt-2" severity="secondary"   />
-      <Button type="submit" label="Se connecter" style="margin-top: 15px;" class="mt-2" raised />
+      <Button type="submit" label="S'inscrire" class="mt-2" severity="secondary" />
+      <Button type="submit" label="Se connecter" style="margin-top: 15px;" class="mt-2" raised @click="sendLogin()" />
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import Checkbox from 'primevue/checkbox';
 import FloatLabel from 'primevue/floatlabel';
-
+import axios from 'axios';
 
 export default {
   components: {
@@ -48,6 +48,35 @@ export default {
       password: null,
       accept: false
     };
+  },
+  methods: {
+    sendLogin() {
+      axios.post('http://localhost:3000/api/login', {
+        username: this.name,
+        password: this.password
+      })
+        .then((response) => {
+
+          // Afficher la réponse du serveur dans la console
+          console.log(response.data);
+
+          let token = response.data.token;
+
+          // Pour sauvegarder le token
+          localStorage.setItem('jwtToken', token);
+
+          // Pour récupérer le token
+          const jwtToken = localStorage.getItem('jwtToken');
+
+          if (jwtToken) {
+            this.$router.push('/');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+    }
   }
 };
 </script>

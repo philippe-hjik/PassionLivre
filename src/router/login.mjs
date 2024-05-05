@@ -7,24 +7,21 @@ import { privateKey } from "../auth/private_key.mjs";
 const loginRouter = express();
 
 loginRouter.post("/", (req, res) => {
-  User.findOne({ where: { username_user: req.body.username_user } })
+  User.findOne({ where: { username: req.body.username } })
     .then((user) => {
       if (!user) { 
         const message = `L'utilisateur demandé n'existe pas`;
         return res.status(404).json({ message });
-      }
-      console.log(user);
-      console.log(req.body);
-      
+      }      
       bcrypt
-        .compare(req.body.password_user, user.password_user)
+        .compare(req.body.password, user.password)
         .then((isPasswordValid) => {
           if (!isPasswordValid) {
-            const message = `Le mot de passe est incorrecte. ${isPasswordValid} ${req.body.password_user}  ${user.password_user}`;
+            const message = `Le mot de passe est incorrecte. ${isPasswordValid} ${req.body.password}  ${user.password}`;
             return res.status(401).json({ message });
           } else {
             // JWT
-            const token = jwt.sign({ id_user: user.id_user }, privateKey, {
+            const token = jwt.sign({ id: user.id }, privateKey, {
               expiresIn: "1y",
             });
             const message = `L'utilisateur a été connecté avec succès`;
