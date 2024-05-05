@@ -12,12 +12,12 @@ loginRouter.post("/", (req, res) => {
       if (!user) { 
         const message = `L'utilisateur demandé n'existe pas`;
         return res.status(404).json({ message });
-      }      
+      }
       bcrypt
         .compare(req.body.password, user.password)
         .then((isPasswordValid) => {
           if (!isPasswordValid) {
-            const message = `Le mot de passe est incorrecte. ${isPasswordValid} ${req.body.password}  ${user.password}`;
+            const message = `Le mot de passe est incorrect`;
             return res.status(401).json({ message });
           } else {
             // JWT

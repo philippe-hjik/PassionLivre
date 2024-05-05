@@ -18,7 +18,10 @@
       </div>
       <Button type="submit" label="S'inscrire" class="mt-2" severity="secondary" />
       <Button type="submit" label="Se connecter" style="margin-top: 15px;" class="mt-2" raised @click="sendLogin()" />
+
     </div>
+    <Message v-if="connected" severity="success">{{ message }}</Message>
+    <Message v-else-if="connected == false" severity="error">{{ message }}</Message>
   </div>
 </template>
 
@@ -28,8 +31,9 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
-import Checkbox from 'primevue/checkbox';
 import FloatLabel from 'primevue/floatlabel';
+import Message from 'primevue/message';
+
 import axios from 'axios';
 
 export default {
@@ -39,23 +43,42 @@ export default {
     Password,
     IconField,
     InputIcon,
-    Checkbox,
-    FloatLabel
+    FloatLabel,
+    Message
   },
   data() {
     return {
       name: null,
       password: null,
-      accept: false
+      connected: null,
+      message: null,
     };
   },
   methods: {
     sendLogin() {
+
+      if (this.name == null || this.password == null) {
+        this.connected = false;
+        return this.message = "Veuillez remplir les champs";
+      }
+
+      if (this.name.length < 2) {
+        this.connected = false;
+        return this.message = "Minimum deux caractères pour le username";
+      }
+      if (this.password < 2) {
+        this.connected = false;
+        return this.message = "Minimum deux caractères pour le password";
+      }
+
       axios.post('http://localhost:3000/api/login', {
         username: this.name,
         password: this.password
       })
         .then((response) => {
+
+          this.connected = true;
+          this.message = response.data.message;
 
           // Afficher la réponse du serveur dans la console
           console.log(response.data);
@@ -69,11 +92,14 @@ export default {
           const jwtToken = localStorage.getItem('jwtToken');
 
           if (jwtToken) {
-            this.$router.push('/');
+            setTimeout(() => { this.$router.push('/'); }, 3000);
+            
           }
         })
         .catch((error) => {
           console.log(error);
+          this.connected = false;
+          this.message = error.response.data.message;
         });
 
     }
