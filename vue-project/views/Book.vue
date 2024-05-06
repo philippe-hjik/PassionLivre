@@ -84,7 +84,9 @@ export default {
             // Initialiser bookData à null ou à un objet vide
             researched: '',
             bookData: null,
+            lastFiveBooks: null,
             titles: null,
+            authors: null,
             suggestions: [],
             dataTrue: 0,
             nodes: null,
@@ -162,14 +164,14 @@ export default {
             .then(response => {
                 // Trier les livres par ordre décroissant de leur date de création
                 const sortedBooks = response.data.sort((a, b) => new Date(b.created) - new Date(a.created));
-
+                console.log(response);
                 // Prendre les 5 premiers livres du tableau trié
-                const lastFiveBooks = sortedBooks.slice(0, 5);
+                this.lastFiveBooks = sortedBooks.slice(0, 5);
 
                 this.titles = response.data.map((book) => book.title);
 
                 // Mettre à jour bookData avec les données des 5 derniers livres
-                this.bookData = lastFiveBooks;
+                this.bookData = response.data;
                 this.dataTrue = 1;
             })
             .catch(error => {
