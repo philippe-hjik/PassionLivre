@@ -10,20 +10,28 @@
                 </template>
 
                 <template #center>
-                    <IconField iconPosition="left">
-                        <InputIcon>
-                            <i class="pi pi-search" />
-                        </InputIcon>
-                        <InputText placeholder="Search" />
-                    </IconField>
-                    <AutoComplete v-model="researched" multiple :suggestions="suggestions" @complete="search" />
-                    
-                    <MultiSelect v-model="selectedCategory" :options="categories" display="chip" filter optionLabel="name"
-                        placeholder="Select categories" :maxSelectedLabels="3" class="w-full md:w-20rem" />
+                    <InputGroup>
+                        <InputGroupAddon>
+                            <i class="pi pi-search"></i>
+                        </InputGroupAddon>
+                        <AutoComplete v-model="researched" placeholder="Search" loading multiple
+                        :suggestions="suggestions" @complete="search"/>
+                    </InputGroup>
+
+
+
                 </template>
 
                 <template #end>
-                    
+                    <InputGroup>
+                        <InputGroupAddon>
+                            <i class="pi pi-book"></i>
+                        </InputGroupAddon>
+                        <MultiSelect v-model="selectedCategory" :options="categories" display="chip" filter
+                        optionLabel="name" placeholder="Select categories" :maxSelectedLabels="3"
+                        class="w-full md:w-20rem" />
+                    </InputGroup>
+
                 </template>
             </Toolbar>
         </div>
@@ -51,7 +59,8 @@ import Dropdown from 'primevue/dropdown';
 import AutoComplete from 'primevue/autocomplete';
 import MultiSelect from 'primevue/multiselect';
 import Listbox from 'primevue/listbox';
-
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
 
 export default {
     components: {
@@ -66,7 +75,9 @@ export default {
         Dropdown,
         AutoComplete,
         MultiSelect,
-        Listbox
+        Listbox,
+        InputGroup,
+        InputGroupAddon
     },
     data() {
         return {
