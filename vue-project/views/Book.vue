@@ -16,28 +16,14 @@
                         </InputIcon>
                         <InputText placeholder="Search" />
                     </IconField>
-                    <Dropdown v-model="selectedCategory" :options="categories" filter optionLabel="name"
-                        placeholder="Select categories" class="w-full md:w-14rem" multiple>
-                        <template #value="slotProps">
-                            <div v-if="slotProps.value" class="flex align-items-center">
-                                <div>{{ slotProps.value.name }}</div>
-                            </div>
-                            <span v-else>
-                                {{ slotProps.placeholder }}
-                            </span>
-                        </template>
-                        <template #option="slotProps">
-                            <div class="flex align-items-center">
-                                <div>{{ slotProps.option.name }}</div>
-                            </div>
-                        </template>
-                    </Dropdown>
-
+                    <AutoComplete v-model="researched" multiple :suggestions="suggestions" @complete="search" />
+                    
+                    <MultiSelect v-model="selectedCategory" :options="categories" display="chip" filter optionLabel="name"
+                        placeholder="Select categories" :maxSelectedLabels="3" class="w-full md:w-20rem" />
                 </template>
 
                 <template #end>
-                    <SplitButton label="Save" :model="items">
-                    </SplitButton>
+                    
                 </template>
             </Toolbar>
         </div>
@@ -54,7 +40,6 @@
 <script>
 import axios from 'axios';
 import bookCard from '../components/bookCard.vue';
-
 import Toolbar from 'primevue/toolbar';
 import TreeSelect from 'primevue/treeselect';
 import Button from 'primevue/button';
@@ -63,7 +48,9 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import SplitButton from 'primevue/splitbutton';
 import Dropdown from 'primevue/dropdown';
-
+import AutoComplete from 'primevue/autocomplete';
+import MultiSelect from 'primevue/multiselect';
+import Listbox from 'primevue/listbox';
 
 
 export default {
@@ -76,12 +63,18 @@ export default {
         InputIcon,
         Button,
         SplitButton,
-        Dropdown
+        Dropdown,
+        AutoComplete,
+        MultiSelect,
+        Listbox
     },
     data() {
         return {
             // Initialiser bookData à null ou à un objet vide
+            researched: '',
             bookData: null,
+            titles: null,
+            suggestions: [],
             dataTrue: 0,
             nodes: null,
             selectedValue: null,
@@ -145,7 +138,7 @@ export default {
                 { name: 'Cuisine régionale' },
                 { name: 'Cuisine santé' },
                 { name: 'Cuisine gastronomique' },
-                { name: 'Histoire de l\'art'},
+                { name: 'Histoire de l\'art' },
                 { name: 'Techniques artistiques' },
                 { name: 'Photographie de paysage' },
                 { name: 'Photographie documentaire' }
@@ -162,6 +155,8 @@ export default {
                 // Prendre les 5 premiers livres du tableau trié
                 const lastFiveBooks = sortedBooks.slice(0, 5);
 
+                this.titles = response.data.map((book) => book.title);
+
                 // Mettre à jour bookData avec les données des 5 derniers livres
                 this.bookData = lastFiveBooks;
                 this.dataTrue = 1;
@@ -170,6 +165,14 @@ export default {
                 console.error('Erreur lors de la récupération des données du livre:', error);
                 this.dataTrue = 0;
             });
+    },
+    methods: {
+        search(event) {
+            // Filtrer les titres des livres qui correspondent à la recherche de l'utilisateur
+            this.suggestions = this.titles.filter(title => title.toLowerCase().includes((event.query.toLowerCase())));
+            console.log(this.suggestions)
+        }
+
     }
 }
 </script>
