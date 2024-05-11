@@ -37,6 +37,8 @@ const comment = commentModel(sequelize, DataTypes);
 const publisher = publisherModel(sequelize, DataTypes);
 const User = userModel(sequelize, DataTypes);
 
+Book.belongsTo(category, { foreignKey: 'fk_category' }); // Spécifiez le nom de la colonne de clé étrangère
+
 let initDb = () => {
   return sequelize
     .sync({ force: true }) //Force la syncronisation dans la db et écrase ce qui était présent avant

@@ -9,7 +9,9 @@ const bookRouter = express();
 
 // Route de get
 bookRouter.get('/', (req, res) => {
- return Book.findAll()    
+ return Book.findAll({
+  include: [category]
+ })    
  .then((Book) => {
     const message = "La liste des livres a bien été récupérée.";
     res.status(200).json(Book);
