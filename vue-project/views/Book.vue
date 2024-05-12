@@ -188,7 +188,7 @@ export default {
         search(event) {
             // Initialisez votre tableau de livres filtrés
             this.filteredBook = [];
-            
+
             // Filtrer les titres des livres qui correspondent à la recherche de l'utilisateur
             this.suggestions = this.titles.filter(title => title.toLowerCase().includes((event.query.toLowerCase())));
 
