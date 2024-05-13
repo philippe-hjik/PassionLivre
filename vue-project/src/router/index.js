@@ -18,7 +18,7 @@ const routes = [
     path: "/book",
     name: "book",
     component: Book,
-    //meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
 ];
 
@@ -28,7 +28,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let isAuthenticated; // Check if the user is authenticated (e.g., by checking the JWT token)
+  let isAuthenticated = localStorage.getItem('jwtToken'); // Check if the user is authenticated (e.g., by checking the JWT token)
   
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {
