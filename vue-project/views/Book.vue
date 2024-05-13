@@ -214,8 +214,6 @@ export default {
                     }
                 });
             }
-
-
         },
         filter() {
             // Initialisez votre tableau de livres filtrés

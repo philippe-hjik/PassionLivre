@@ -14,21 +14,23 @@
                                 </InputGroup>
                                 <InputGroup class="field">
                                     <InputGroupAddon>
-                                        <InputText id="input" v-model="author" type="text" placeholder="Auteur" />
-                                        <InputText id="input" v-model="author" type="text" placeholder="Auteur" />
+                                        <i class="pi pi-sort-numeric-down"></i>
                                     </InputGroupAddon>
-                                    
+                                    <InputText v-model="pages" type="number" placeholder="Pages" />
                                 </InputGroup>
-
+                                <label for="first">Auteur</label>
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <InputText v-model="author.firstName" style="margin-right: 10px;" type="text" placeholder="Prénom" />
+                                        <InputText v-model="author.lastName"type="text" placeholder="Nom de famille" />
+                                    </InputGroupAddon>
+                                </InputGroup>
                                 <InputGroup class="field">
                                     <InputGroupAddon>
                                         <i class="pi pi-calendar"></i>
                                     </InputGroupAddon>
                                     <Calendar dateFormat="yy-mm-dd" v-model="createDate" placeholder="Date de création" />
                                 </InputGroup>
-                                    
-
-                                
                                 <Divider>
                                     <b>Or</b>
                                 </Divider>
@@ -125,10 +127,15 @@ export default {
         return {
             // Initialiser bookData à null ou à un objet vide
             title: null,
-            author: null,
+            author: {
+                firstName: null,
+                lastName: null,
+            },
             summary: null,
             publisher: null,
             createDate: null,
+            pages: null,
+            category: null,
         };
     },
     mounted() {
@@ -151,7 +158,9 @@ export default {
 
                     // Accéder aux métadonnées du livre pour obtenir le titre
                     this.title = book.package.metadata.title;
-                    this.author = book.package.metadata.creator;
+                    this.author = book.package.metadata.creator.split(' ', [2]);
+                    this.author.firstName = this.author[0];
+                    this.author.lastName = this.author[1];
                     this.summary = book.package.metadata.description;
                     this.createDate = book.package.metadata.pubdate;
 
@@ -159,7 +168,6 @@ export default {
                 };
                 reader.readAsArrayBuffer(file);
             }
-
         }
     }
 }
