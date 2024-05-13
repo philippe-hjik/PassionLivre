@@ -15,11 +15,8 @@
                             <i class="pi pi-search"></i>
                         </InputGroupAddon>
                         <AutoComplete v-model="researched" placeholder="Search" loading multiple
-                        :suggestions="suggestions" @complete="search"/>
+                            :suggestions="suggestions" @complete="search" />
                     </InputGroup>
-
-
-
                 </template>
 
                 <template #end>
@@ -28,15 +25,22 @@
                             <i class="pi pi-book"></i>
                         </InputGroupAddon>
                         <MultiSelect v-model="selectedCategory" :options="categories" display="chip" filter
-                        optionLabel="name" placeholder="Select categories" :maxSelectedLabels="3"
-                        class="w-full md:w-20rem" />
+                            optionLabel="name" placeholder="Select categories" :maxSelectedLabels="3"
+                            class="w-full md:w-20rem" @change="filter" />
                     </InputGroup>
 
                 </template>
             </Toolbar>
         </div>
-        <div style="display: flex; flex-wrap: wrap;">
+        <div v-if="filteredBook < 1" style="display: flex; flex-wrap: wrap;">
             <bookCard v-if="bookData" v-for="book in bookData" :dataTrue="1" :book="book"></bookCard>
+            <div v-else style="display: flex; flex-wrap: wrap;">
+                <bookCard v-for="n in 10" :dataTrue="dataTrue"></bookCard>
+                <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
+            </div>
+        </div>
+        <div v-else style="display: flex; flex-wrap: wrap; background-color: red;">
+            <bookCard v-if="filteredBook" v-for="book in filteredBook" :dataTrue="1" :book="book"></bookCard>
             <div v-else style="display: flex; flex-wrap: wrap;">
                 <bookCard v-for="n in 10" :dataTrue="dataTrue"></bookCard>
                 <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
@@ -92,11 +96,12 @@ export default {
             nodes: null,
             selectedValue: null,
             selectedCategory: null,
+            filteredBook: [],
             categories: [
                 { name: 'Roman' },
                 { name: 'Nouvelle' },
                 { name: 'Science-fiction' },
-                { name: 'Fantaisie' },
+                { name: 'Fantastique' },
                 { name: 'Policier' },
                 { name: 'Thriller' },
                 { name: 'Romance' },
@@ -181,11 +186,49 @@ export default {
     },
     methods: {
         search(event) {
+            // Initialisez votre tableau de livres filtrés
+            this.filteredBook = [];
+
             // Filtrer les titres des livres qui correspondent à la recherche de l'utilisateur
             this.suggestions = this.titles.filter(title => title.toLowerCase().includes((event.query.toLowerCase())));
-            console.log(this.suggestions)
-        }
 
+            if (this.researched == '') {
+                // Filtrez les livres en fonction des catégories sélectionnées
+                this.bookData.forEach((book) => {
+                    // Vérifiez si le livre correspond à au moins une des catégories sélectionnées
+                    if (this.suggestions.some((name) => book.title == name)) {
+                        // Si le livre correspond à une catégorie sélectionnée, ajoutez-le au tableau des livres filtrés
+                        this.filteredBook.push(book);
+                    }
+                });
+            }
+            else {
+                // Filtrez les livres en fonction des catégories sélectionnées
+                this.bookData.forEach((book) => {
+                    // Vérifiez si le livre correspond à au moins une des catégories sélectionnées
+                    if (this.researched.some((name) => book.title == name)) {
+                        // Si le livre correspond à une catégorie sélectionnée, ajoutez-le au tableau des livres filtrés
+                        this.filteredBook.push(book);
+                    }
+                });
+            }
+
+
+        },
+        filter() {
+            // Initialisez votre tableau de livres filtrés
+            this.filteredBook = [];
+
+            // Filtrez les livres en fonction des catégories sélectionnées
+            this.bookData.forEach((book) => {
+                // Vérifiez si le livre correspond à au moins une des catégories sélectionnées
+                if (this.selectedCategory.some((category) => book.t_category.name === category.name)) {
+                    // Si le livre correspond à une catégorie sélectionnée, ajoutez-le au tableau des livres filtrés
+                    this.filteredBook.push(book);
+                }
+            });
+            console.log(this.filteredBook);
+        }
     }
 }
 </script>
