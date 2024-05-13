@@ -4,7 +4,9 @@
         <div class="card">
             <Toolbar>
                 <template #start>
-                    <Button icon="pi pi-plus" class="mr-2" severity="secondary" />
+                    <router-link to="/book/add" rel="noopener">
+                        <Button icon="pi pi-plus" class="mr-2" severity="secondary" />
+                     </router-link>
                     <Button icon="pi pi-pencil" class="mr-2" severity="secondary" />
                     <Button icon="pi pi-upload" severity="secondary" />
                 </template>

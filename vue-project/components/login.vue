@@ -16,9 +16,11 @@
         </FloatLabel>
 
       </div>
-      <Button type="submit" label="S'inscrire" class="mt-2, field" severity="secondary" />
-      <Button type="submit" label="Se connecter" class="mt-2, field" raised @click="sendLogin()" />
-
+      <Button type="submit" label="Se connecter" icon="pi pi-user" class="mt-2" raised @click="sendLogin()" />
+      <Divider>
+        <b>Or</b>
+      </Divider>
+      <Button type="submit" label="S'inscrire" icon="pi pi-user-plus" class="mt-2" severity="success" />
     </div>
     <Message v-if="connected" severity="success">{{ message }}</Message>
     <Message v-else-if="connected == false" severity="error">{{ message }}</Message>
@@ -33,7 +35,7 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import FloatLabel from 'primevue/floatlabel';
 import Message from 'primevue/message';
-
+import Divider from 'primevue/divider';
 import axios from 'axios';
 
 export default {
@@ -44,7 +46,8 @@ export default {
     IconField,
     InputIcon,
     FloatLabel,
-    Message
+    Message,
+    Divider
   },
   data() {
     return {
@@ -92,7 +95,7 @@ export default {
           const jwtToken = localStorage.getItem('jwtToken');
 
           if (jwtToken) {
-            setTimeout(() => { this.$router.push('/'); }, 3000);
+            setTimeout(() => { this.$router.push('/book'); }, 2000);
             
           }
         })
