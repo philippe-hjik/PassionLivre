@@ -86,13 +86,23 @@
                     <div class="flex flex-column h-12rem">
                         <div class="flex-auto flex justify-content-center align-items-center font-medium">
                             <div class="field p-fluid">
-                                <label for="first">Livre</label>
+                                <label for="first">Éditeur</label>
+
                                 <InputGroup class="field">
                                     <InputGroupAddon>
-                                        <i class="pi pi-book"></i>
+                                        <InputText v-model="editor.firstName" style="margin-right: 10px;" type="text"
+                                            placeholder="Prénom" />
+                                        <InputText v-model="editor.lastName" type="text" placeholder="Nom de famille" />
                                     </InputGroupAddon>
-                                    <InputText id="input" v-model="title" type="text" placeholder="Titre" />
                                 </InputGroup>
+
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <i class="pi pi-calendar"></i>
+                                    </InputGroupAddon>
+                                    <Calendar v-model="editionYear" view="year" placeholder="Année d'édition" dateFormat="yy" />
+                                </InputGroup>
+                                
                             </div>
                         </div>
                     </div>
@@ -163,10 +173,15 @@ export default {
                 firstName: null,
                 lastName: null,
             },
+            editor: {
+                firstName: null,
+                lastName: null,
+            },
             extract: null,
             summary: null,
             publisher: null,
             createDate: null,
+            editionYear: null,
             pages: null,
             category: null,
             selectedCategory: null,
