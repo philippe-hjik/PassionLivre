@@ -1,5 +1,8 @@
 <template>
-  <Card style="width: 100%; overflow: hidden; margin: 5px;">
+  <Card style="width: 300px; overflow: hidden; margin: 5px;">
+    <template #header>
+      <img :src="imageUrl" width="100%" alt="Image dynamique">
+    </template>
     <template #title>
       <Skeleton width="100%" height="8rem" v-if="!dataTrue" />
       <template v-else>{{ book.title }}</template>
@@ -17,7 +20,7 @@
       </template>
     </template>
   </Card>
-  <img :src="imageUrl" alt="Image dynamique">
+
 </template>
 
 <script>
