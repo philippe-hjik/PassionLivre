@@ -8,7 +8,6 @@
                         <Button icon="pi pi-plus" class="mr-2" severity="secondary" />
                      </router-link>
                     <Button icon="pi pi-pencil" class="mr-2" severity="secondary" />
-                    <Button icon="pi pi-upload" severity="secondary" />
                 </template>
 
                 <template #center>
@@ -27,7 +26,7 @@
                             <i class="pi pi-book"></i>
                         </InputGroupAddon>
                         <MultiSelect v-model="selectedCategory" :options="categories" display="chip" filter
-                            optionLabel="name" placeholder="Select categories" :maxSelectedLabels="3"
+                            optionLabel="name" placeholder="Select categories" :maxSelectedLabels="1"
                             class="w-full md:w-20rem" @change="filter" />
                     </InputGroup>
 
@@ -41,7 +40,7 @@
                 <!-- Ajoutez autant de bookCard avec dataTrue que nécessaire pour afficher les skeletons -->
             </div>
         </div>
-        <div v-else style="display: flex; flex-wrap: wrap; background-color: red;">
+        <div v-else style="display: flex; flex-wrap: wrap;">
             <bookCard v-if="filteredBook" v-for="book in filteredBook" :dataTrue="1" :book="book"></bookCard>
             <div v-else style="display: flex; flex-wrap: wrap;">
                 <bookCard v-for="n in 10" :dataTrue="dataTrue"></bookCard>
