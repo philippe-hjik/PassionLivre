@@ -51,7 +51,7 @@ const bookModel = (sequelize, DataTypes) => {
             },
         },
         cover: {
-            type: DataTypes.STRING,
+            type: DataTypes.BLOB('long'),
             allowNull: true,
             validate: {
                 notEmpty: {
