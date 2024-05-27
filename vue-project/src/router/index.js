@@ -27,6 +27,10 @@ const routes = [
     component: () => import("../../components/login.vue"),
     meta: { requiresAuth: true }
   },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("../../views/NoPage.vue"),
+  },
 ];
 
 const router = createRouter({
