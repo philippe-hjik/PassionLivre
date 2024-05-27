@@ -25,7 +25,9 @@ bookRouter.get('/', (req, res) => {
 // Route GET avec id
 bookRouter.get('/:id', auth, (req, res) => {
     const Id = req.params.id;
-    return Book.findByPk(Id)    
+    return Book.findByPk(Id,{
+      include: [category, author, publisher, User]
+    })    
     .then((Book) => {
        const message = `Le livre dont le livre vaut ${Id}`;
        res.status(200).json(success(Book, message));
