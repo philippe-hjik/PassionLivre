@@ -3,6 +3,7 @@ import HomeView from "../../views/Home.vue";
 import Login from "../../components/login.vue"; 
 import Book from "../../views/Book.vue";
 import AddBook from "../../views/AddBook.vue";
+import BookDetail from "../../views/BookDetail.vue"; // Import the new component
 
 const routes = [
   {
@@ -26,6 +27,13 @@ const routes = [
     name: "add",
     component: AddBook,
     meta: { requiresAuth: true }
+  },
+  {
+    path: "/book/:id",
+    name: "bookDetail",
+    component: BookDetail,
+    props: true, // Pass route params as props
+    meta: { requiresAuth: true },
   },
 ];
 
