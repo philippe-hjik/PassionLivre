@@ -1,30 +1,26 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../../views/Home.vue";
-import Login from "../../components/login.vue"; 
-import Book from "../../views/Book.vue";
-import AddBook from "../../views/AddBook.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import("../../views/Home.vue"),
   },
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: () => import("../../components/login.vue"),
   },
   {
     path: "/book",
     name: "book",
-    component: Book,
+    component: () => import("../../views/Book.vue"),
     meta: { requiresAuth: true }
   },
   {
     path: "/book/add",
     name: "add",
-    component: AddBook,
+    component: () => import("../../views/AddBook.vue"),
     meta: { requiresAuth: true }
   },
 ];
