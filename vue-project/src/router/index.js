@@ -4,6 +4,7 @@ import Login from "../../components/login.vue";
 import Book from "../../views/Book.vue";
 import AddBook from "../../views/AddBook.vue";
 import BookDetail from "../../views/BookDetail.vue"; // Import the new component
+import NoPage from "../../views/NoPage.vue";
 
 const routes = [
   {
@@ -34,6 +35,10 @@ const routes = [
     component: BookDetail,
     props: true, // Pass route params as props
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: NoPage,
   },
 ];
 
