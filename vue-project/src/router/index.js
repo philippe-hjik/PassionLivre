@@ -13,23 +13,19 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../../components/login.vue"),
+    component: Login,
   },
   {
     path: "/book",
     name: "book",
-    component: () => import("../../components/login.vue"),
+    component: Book,
     meta: { requiresAuth: true }
   },
   {
     path: "/book/add",
     name: "add",
-    component: () => import("../../components/login.vue"),
+    component: AddBook,
     meta: { requiresAuth: true }
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    component: () => import("../../views/NoPage.vue"),
   },
 ];
 
