@@ -1,13 +1,16 @@
 <template>
   <Menu></Menu>
 <RouterView></RouterView>
+  <Footer></Footer>
 </template>
 
 <script>
 import Menu from '../components/Menu.vue';
+import Footer from '../components/Footer.vue';
 export default {
   components: { 
-    Menu
+    Menu,
+    Footer
   },
 }
 </script>
