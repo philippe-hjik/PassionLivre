@@ -1,5 +1,5 @@
 // routes.mjs
-import { Book, category } from "../../sequelize/sequelize.mjs"
+import { Book, User, author, category, publisher } from "../../sequelize/sequelize.mjs"
 import {success} from "../helper.mjs";
 import express from 'express';
 
@@ -10,7 +10,7 @@ const bookRouter = express();
 // Route de get
 bookRouter.get('/', (req, res) => {
  return Book.findAll({
-  include: [category]
+  include: [category, author, publisher, User]
  })    
  .then((Book) => {
     const message = "La liste des livres a bien été récupérée.";
