@@ -29,7 +29,8 @@ export default {
           items: [
             {
                 label: 'Nouveau Livre',
-                icon: 'pi pi-plus-circle'
+                icon: 'pi pi-plus-circle',
+                url: '/book/add'
             },
             {
                 label: 'Recherche',

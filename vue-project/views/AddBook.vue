@@ -1,11 +1,12 @@
 <template>
     <div class="card flex justify-content-center">
         <Stepper>
-            <StepperPanel header="Auteur">
+            <StepperPanel header="Description">
                 <template #content="{ nextCallback }">
-                    <div class="flex flex-column h-12rem">
+                    <div class="flex flex-column h-30rem">
                         <div class="flex-auto flex justify-content-center align-items-center font-medium">
                             <div class="field p-fluid">
+                                <label for="first">Livre</label>
                                 <InputGroup class="field">
                                     <InputGroupAddon>
                                         <i class="pi pi-book"></i>
@@ -14,22 +15,41 @@
                                 </InputGroup>
                                 <InputGroup class="field">
                                     <InputGroupAddon>
-                                        <i class="pi pi-sort-numeric-down"></i>
+                                        <img alt="dropdown icon" src="../assets/des-pages.png">
                                     </InputGroupAddon>
                                     <InputText v-model="pages" type="number" placeholder="Pages" />
                                 </InputGroup>
-                                <label for="first">Auteur</label>
+
                                 <InputGroup class="field">
                                     <InputGroupAddon>
-                                        <InputText v-model="author.firstName" style="margin-right: 10px;" type="text" placeholder="Prénom" />
-                                        <InputText v-model="author.lastName"type="text" placeholder="Nom de famille" />
+                                        <img alt="dropdown icon" src="../assets/options.png">
                                     </InputGroupAddon>
+                                    <Dropdown v-model="selectedCategory" :options="categories" filter optionLabel="name" placeholder="Catégorie"/>
                                 </InputGroup>
+
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <img alt="dropdown icon" src="../assets/exploration-de-texte.png">
+                                    </InputGroupAddon>
+                                    <InputText v-model="extract" type="text" placeholder="Lien vers un extrait du livre" />
+                                </InputGroup>
+
                                 <InputGroup class="field">
                                     <InputGroupAddon>
                                         <i class="pi pi-calendar"></i>
                                     </InputGroupAddon>
-                                    <Calendar dateFormat="yy-mm-dd" v-model="createDate" placeholder="Date de création" />
+                                    <Calendar dateFormat="yy-mm-dd" v-model="createDate"
+                                        placeholder="Date de création" />
+                                </InputGroup>
+
+                                <label for="first">Auteur</label>
+
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <InputText v-model="author.firstName" style="margin-right: 10px;" type="text"
+                                            placeholder="Prénom" />
+                                        <InputText v-model="author.lastName" type="text" placeholder="Nom de famille" />
+                                    </InputGroupAddon>
                                 </InputGroup>
                                 <Divider>
                                     <b>Or</b>
@@ -48,11 +68,11 @@
                     </div>
                 </template>
             </StepperPanel>
-            <StepperPanel header="Extrait">
+            <StepperPanel header="Résumé">
                 <template #content="{ prevCallback, nextCallback }">
-                    <div class="flex flex-column h-12rem">
+                    <div class="flex flex-column h-30rem">
 
-                        <Textarea v-model="summary" placeholder="Extrait" rows="5" cols="20"
+                        <Textarea v-model="summary" placeholder="Extrait du livre" rows="5" cols="20"
                             class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium"></Textarea>
                     </div>
                     <div class="flex pt-4 justify-content-between">
@@ -64,12 +84,31 @@
             <StepperPanel header="Maison d'édition">
                 <template #content="{ prevCallback }">
                     <div class="flex flex-column h-12rem">
-                        <div
-                            class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                            Content III</div>
+                        <div class="flex-auto flex justify-content-center align-items-center font-medium">
+                            <div class="field p-fluid">
+                                <label for="first">Éditeur</label>
+
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <InputText v-model="editor.firstName" style="margin-right: 10px;" type="text"
+                                            placeholder="Prénom" />
+                                        <InputText v-model="editor.lastName" type="text" placeholder="Nom de famille" />
+                                    </InputGroupAddon>
+                                </InputGroup>
+
+                                <InputGroup class="field">
+                                    <InputGroupAddon>
+                                        <i class="pi pi-calendar"></i>
+                                    </InputGroupAddon>
+                                    <Calendar v-model="editionYear" view="year" placeholder="Année d'édition" dateFormat="yy" />
+                                </InputGroup>
+                                
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex pt-4 justify-content-start">
+                    <div class="flex pt-4 justify-content-between">
                         <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="prevCallback" />
+                        <Button label="Publier" severity="success" icon="pi pi-arrow-right" iconPos="right"/>
                     </div>
                 </template>
             </StepperPanel>
@@ -79,6 +118,8 @@
 
 <script>
 import axios from 'axios';
+
+import Image from 'primevue/image';
 
 import Textarea from 'primevue/textarea';
 import Toolbar from 'primevue/toolbar';
@@ -121,7 +162,8 @@ export default {
         FileUpload,
         Textarea,
         Divider,
-        Calendar
+        Calendar,
+        Image
     },
     data() {
         return {
@@ -131,11 +173,82 @@ export default {
                 firstName: null,
                 lastName: null,
             },
+            editor: {
+                firstName: null,
+                lastName: null,
+            },
+            extract: null,
             summary: null,
             publisher: null,
             createDate: null,
+            editionYear: null,
             pages: null,
             category: null,
+            selectedCategory: null,
+            categories: [
+                { name: 'Roman' },
+                { name: 'Nouvelle' },
+                { name: 'Science-fiction' },
+                { name: 'Fantastique' },
+                { name: 'Policier' },
+                { name: 'Thriller' },
+                { name: 'Romance' },
+                { name: 'Littérature classique' },
+                { name: 'Biographie' },
+                { name: 'Mémoires' },
+                { name: 'Histoire' },
+                { name: 'Politique' },
+                { name: 'Sciences' },
+                { name: 'Psychologie' },
+                { name: 'Développement personnel' },
+                { name: 'Voyage' },
+                { name: 'Cuisine' },
+                { name: 'Art et photographie' },
+                { name: 'Poésie' },
+                { name: 'Théâtre' },
+                { name: 'Bandes dessinées / Comics' },
+                { name: 'Livres académiques / Universitaires' },
+                { name: 'Livres religieux / Spirituels' },
+                { name: 'Hard science-fiction' },
+                { name: 'Space opera' },
+                { name: 'Dystopie' },
+                { name: 'Uchronie' },
+                { name: 'High fantasy' },
+                { name: 'Low fantasy' },
+                { name: 'Fantaisie urbaine' },
+                { name: 'Fantaisie historique' },
+                { name: 'Enquêtes classiques' },
+                { name: 'Polars nordiques' },
+                { name: 'Polars historiques' },
+                { name: 'Thrillers psychologiques' },
+                { name: 'Romance contemporaine' },
+                { name: 'Romance historique' },
+                { name: 'Romance érotique' },
+                { name: 'Romance fantastique' },
+                { name: 'Œuvres antiques' },
+                { name: 'Classiques français' },
+                { name: 'Classiques anglais' },
+                { name: 'Classiques russes' },
+                { name: 'Physique' },
+                { name: 'Chimie' },
+                { name: 'Biologie' },
+                { name: 'Astronomie' },
+                { name: 'Psychologie clinique' },
+                { name: 'Psychologie sociale' },
+                { name: 'Psychologie du développement' },
+                { name: 'Psychologie cognitive' },
+                { name: 'Récits de voyage' },
+                { name: 'Guides de voyage' },
+                { name: 'Aventures de voyage' },
+                { name: 'Recettes du monde' },
+                { name: 'Cuisine régionale' },
+                { name: 'Cuisine santé' },
+                { name: 'Cuisine gastronomique' },
+                { name: 'Histoire de l\'art' },
+                { name: 'Techniques artistiques' },
+                { name: 'Photographie de paysage' },
+                { name: 'Photographie documentaire' }
+            ]
         };
     },
     mounted() {
@@ -163,8 +276,8 @@ export default {
                     this.author.lastName = this.author[1];
                     this.summary = book.package.metadata.description;
                     this.createDate = book.package.metadata.pubdate;
-
-                    console.log("Titre du livre:", book.package.metadata);
+                    this.imagePath = book.archive.urlCache;
+                    console.log(book.archive.urlCache);
                 };
                 reader.readAsArrayBuffer(file);
             }
