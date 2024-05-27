@@ -1,22 +1,29 @@
 <template>
-  <div v-if="book">
+  <div v-if="book" class="book-detail">
     <h1>{{ book.title }}</h1>
     <img :src="bookCover" alt="Book Cover" v-if="bookCover">
+    <p><strong>Author:</strong> {{ book.t_author.firstName }} {{ book.t_author.lastName }}</p>
     <p><strong>Average Rating:</strong> {{ book.average }}</p>
+    <ProgressBar :value="book.average*20">{{book.average}}/5</ProgressBar>
     <p><strong>Summary:</strong> {{ book.summary }}</p>
     <p><strong>Extract:</strong> {{ book.extract }}</p>
     <p><strong>Pages:</strong> {{ book.pages }}</p>
     <p><strong>Year:</strong> {{ book.year }}</p>
-    <p><strong>Category:</strong> {{ book.t_category }}</p>
+    <p><strong>Category:</strong> {{ book.t_category.name }}</p>
+    <p><strong>Publisher:</strong> {{ book.t_publisher.name }}</p>
+    <p><strong>Uploaded By:</strong> {{ book.t_user.username }}</p>
+    <h1>asd</h1>
     <!-- Add more details as necessary -->
   </div>
   <div v-else>
-    <p>Loading...</p>
+    <ProgressSpinner style="display: flex; justify-content: center; align-items: center;"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ProgressBar from 'primevue/progressbar';
+import ProgressSpinner from 'primevue/progressspinner';
 
 export default {
   name: "BookDetail",
@@ -25,6 +32,10 @@ export default {
       type: String,
       required: true,
     },
+  },
+  components: {
+    ProgressBar,
+    ProgressSpinner
   },
   data() {
     return {
@@ -41,12 +52,14 @@ export default {
       }
       return '';
     },
+    bookFile() {
+      return `http://localhost:3000/${this.book.upload}`;
+    }
   },
   methods: {
     async fetchBookDetails() {
       try {
         let token = localStorage.getItem('jwtToken');
-
         let config = {
           headers: {
             'Authorization': 'Bearer ' + token
@@ -55,7 +68,7 @@ export default {
 
         const response = await axios.get(`http://localhost:3000/api/books/${this.id}`, config);
         this.book = response.data.message;
-        console.log(response.data);
+        console.log(this.book);
       } catch (error) {
         console.error('Erreur lors de la récupération des données du livre:', error);
       }
@@ -68,5 +81,34 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
+.book-detail {
+  padding: 20px;
+}
+
+.book-detail h1 {
+  margin-bottom: 20px;
+}
+
+.book-detail img {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+
+.book-detail p {
+  margin-bottom: 10px;
+}
+
+.book-detail a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.book-detail a:hover {
+  background-color: #0056b3;
+}
 </style>

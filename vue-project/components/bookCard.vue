@@ -1,5 +1,5 @@
 <template>
-  <Card style="width: 300px; overflow: hidden; margin: 5px;">
+  <Card style="width: 300px; overflow: hidden; margin: 5px;" @click="this.$router.push('/book/'+book.id);">
     <template #header>
       <img :src="imageUrl" width="100%" alt="Image dynamique">
     </template>
@@ -65,6 +65,11 @@ export default {
 
     }
 
+  },
+  methods: {
+    bookDetail(){
+      return
+    }
   }
 }
 </script>

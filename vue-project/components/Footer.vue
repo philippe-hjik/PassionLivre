@@ -45,7 +45,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: sticky;
   width: 100%;
   bottom: 0;
 }
@@ -57,7 +57,7 @@ export default {
 }
 
 .footer a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .footer span {
