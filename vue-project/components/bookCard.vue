@@ -51,6 +51,8 @@ export default {
   },
   mounted() {
     if (this.book) {
+      if(this.book.cover)
+      {
       // Simulons un tableau binaire d'image (ceci devrait venir de votre serveur ou autre source)
       const binaryData = this.book.cover.data;
 
@@ -59,6 +61,8 @@ export default {
 
       // Création de l'URL de l'image
       this.imageUrl = URL.createObjectURL(blob);
+      }
+
     }
 
   }

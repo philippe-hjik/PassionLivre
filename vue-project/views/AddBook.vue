@@ -24,14 +24,16 @@
                                     <InputGroupAddon>
                                         <img alt="dropdown icon" src="../assets/options.png">
                                     </InputGroupAddon>
-                                    <Dropdown v-model="selectedCategory" :options="categories" filter optionLabel="name" placeholder="Catégorie"/>
+                                    <Dropdown v-model="selectedCategory" :options="categories" filter optionLabel="name"
+                                        placeholder="Catégorie" />
                                 </InputGroup>
 
                                 <InputGroup class="field">
                                     <InputGroupAddon>
                                         <img alt="dropdown icon" src="../assets/exploration-de-texte.png">
                                     </InputGroupAddon>
-                                    <InputText v-model="extract" type="text" placeholder="Lien vers un extrait du livre" />
+                                    <InputText v-model="extract" type="text"
+                                        placeholder="Lien vers un extrait du livre" />
                                 </InputGroup>
 
                                 <InputGroup class="field">
@@ -100,16 +102,21 @@
                                     <InputGroupAddon>
                                         <i class="pi pi-calendar"></i>
                                     </InputGroupAddon>
-                                    <Calendar v-model="editionYear" view="year" placeholder="Année d'édition" dateFormat="yy" />
+                                    <Calendar v-model="editionYear" view="year" placeholder="Année d'édition"
+                                        dateFormat="yy" />
                                 </InputGroup>
-                                
+
                             </div>
                         </div>
                     </div>
                     <div class="flex pt-4 justify-content-between">
                         <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="prevCallback" />
-                        <Button label="Publier" severity="success" icon="pi pi-arrow-right" iconPos="right"/>
+                        <Button label="Publier" severity="success" icon="pi pi-arrow-right" @click="sendData"
+                            iconPos="right" />
                     </div>
+                    <Message v-if="requestStatus == 200" severity="success">{{message}}</Message>
+                    <Message v-else-if="requestStatus != 0" severity="error">{{message}}</Message>
+
                 </template>
             </StepperPanel>
         </Stepper>
@@ -118,9 +125,7 @@
 
 <script>
 import axios from 'axios';
-
 import Image from 'primevue/image';
-
 import Textarea from 'primevue/textarea';
 import Toolbar from 'primevue/toolbar';
 import TreeSelect from 'primevue/treeselect';
@@ -141,6 +146,7 @@ import FileUpload from 'primevue/fileupload';
 import ePub from 'epubjs';
 import Divider from 'primevue/divider';
 import Calendar from 'primevue/calendar';
+import Message from 'primevue/message';
 
 export default {
     components: {
@@ -163,7 +169,8 @@ export default {
         Textarea,
         Divider,
         Calendar,
-        Image
+        Image,
+        Message
     },
     data() {
         return {
@@ -185,6 +192,8 @@ export default {
             pages: null,
             category: null,
             selectedCategory: null,
+            requestStatus: 0,
+            message: null,
             categories: [
                 { name: 'Roman' },
                 { name: 'Nouvelle' },
@@ -281,6 +290,46 @@ export default {
                 };
                 reader.readAsArrayBuffer(file);
             }
+        },
+        sendData() {
+            /*
+            const data = {
+                title: this.title,
+                pages: this.pages,
+                autor: this.author,
+                extract: this.extract,
+                summary: this.summary,
+                publisher: this.publisher,
+                createDate: this.createDate,
+                editionYear: this.editionYear,
+                selectedCategory: this.selectedCategory,
+                editor: this.editor,
+            }
+*/
+            const data = {
+                title: this.title,
+                pages: this.pages,
+            }
+
+            const token = localStorage.getItem('jwtToken');
+
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+
+            axios.post('http://localhost:3000/api/books', data, config)
+                .then((response) => {
+                    console.log(response);
+                    this.requestStatus = response.status;
+                    this.message = response.data.message;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.requestStatus = error.response.status;
+                    this.message = error.response.data.message;
+                });
         }
     }
 }
