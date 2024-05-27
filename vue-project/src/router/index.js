@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../../views/Home.vue";
+import Login from "../../components/login.vue"; 
+import Book from "../../views/Book.vue";
+import AddBook from "../../views/AddBook.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import("../../views/Home.vue"),
+    component: HomeView,
   },
   {
     path: "/login",
@@ -14,13 +18,13 @@ const routes = [
   {
     path: "/book",
     name: "book",
-    component: () => import("../../views/Book.vue"),
+    component: () => import("../../components/login.vue"),
     meta: { requiresAuth: true }
   },
   {
     path: "/book/add",
     name: "add",
-    component: () => import("../../views/AddBook.vue"),
+    component: () => import("../../components/login.vue"),
     meta: { requiresAuth: true }
   },
 ];
