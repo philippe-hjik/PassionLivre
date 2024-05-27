@@ -1,4 +1,5 @@
 <template>
+  <Button label="Back" severity="success" icon="pi pi-arrow-left" style="margin-top: 25px;" @click="this.$router.push('/book/');" />
   <div v-if="book" class="book-detail">
     <h1>{{ book.title }}</h1>
     <img :src="bookCover" alt="Book Cover" v-if="bookCover">
@@ -23,6 +24,7 @@
 import axios from 'axios';
 import ProgressBar from 'primevue/progressbar';
 import ProgressSpinner from 'primevue/progressspinner';
+import Button from 'primevue/button';
 
 export default {
   name: "BookDetail",
@@ -34,7 +36,8 @@ export default {
   },
   components: {
     ProgressBar,
-    ProgressSpinner
+    ProgressSpinner,
+    Button,
   },
   data() {
     return {
