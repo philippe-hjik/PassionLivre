@@ -12,7 +12,6 @@
     <p><strong>Category:</strong> {{ book.t_category.name }}</p>
     <p><strong>Publisher:</strong> {{ book.t_publisher.name }}</p>
     <p><strong>Uploaded By:</strong> {{ book.t_user.username }}</p>
-    <h1>asd</h1>
     <!-- Add more details as necessary -->
   </div>
   <div v-else>
