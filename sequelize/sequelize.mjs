@@ -42,6 +42,7 @@ Book.belongsTo(author, { foreignKey: 'fk_author' }); // Spécifiez le nom de la 
 Book.belongsTo(User, { foreignKey: 'fk_user' }); // Spécifiez le nom de la colonne de clé étrangère
 Book.belongsTo(publisher, { foreignKey: 'fk_publisher' }); // Spécifiez le nom de la colonne de clé étrangère
 
+comment.belongsTo(Book, {foreignKey: 'fk_book'})
 
 let initDb = () => {
   return sequelize

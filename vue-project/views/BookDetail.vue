@@ -25,11 +25,11 @@
   <Dialog v-model:visible="visible" modal header="Commentaire" :style="{ width: '25rem' }">
     <span class="p-text-secondary block mb-5">Ajouter une appréciation</span>
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="username" class="font-semibold w-6rem">Note</label>
+      <label for="note" class="font-semibold w-6rem">Note</label>
       <Rating v-model="rating" :cancel="false" />
     </div>
     <div class="flex align-items-center gap-3 mb-5">
-      <label for="email" class="font-semibold w-6rem">Commentaire</label>
+      <label for="comment" class="font-semibold w-6rem">Commentaire</label>
       <Textarea v-model="comment" rows="2" cols="30" />
     </div>
     <div class="flex justify-content-end gap-2">
@@ -47,6 +47,7 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import Rating from 'primevue/rating';
 import Textarea from 'primevue/textarea';
+import { useToast } from "primevue/usetoast";
 
 export default {
   name: "BookDetail",
@@ -62,13 +63,14 @@ export default {
     Button,
     Dialog,
     Rating,
-    Textarea
+    Textarea,
   },
   data() {
     return {
       book: null,
       visible: null,
       rating: null,
+      comment: null,
     };
   },
   computed: {
@@ -113,11 +115,52 @@ export default {
             'Authorization': 'Bearer ' + token
           }
         };
-        const response = await axios.post(`http://localhost:3000/api/comments/`, config);
-        
+
+        console.log(config);
+        const response = await axios.post(`http://localhost:3000/api/comments/`, {
+
+          fk_book: this.id,
+          fk_user: 1,
+          note: this.rating,
+          text: this.comment,
+
+        }, config);
+
+        axios.get(`http://localhost:3000/api/comments/`, config).then((response) => {
+
+          // Assuming this.id0 contains the fk_book value you want to filter by
+          const filteredComments = response.data.filter(comment => comment.fk_book == this.id);
+
+          let sum = 0;
+
+          filteredComments.forEach(num => {
+            sum += parseInt(num.note);
+          });
+
+          let rating = (sum / filteredComments.length).toFixed(1);
+
+          console.log(`Average note for fk_book ${this.id}:`, rating);
+
+          axios.put(`http://localhost:3000/api/books/${this.id}`, {
+            average: rating
+          }, config).then((response) => {
+
+            window.location.reload();
+
+          }).catch((error) => {
+
+
+          });
+
+        }).catch((error) => {
+
+
+        });
+
         console.log(response);
+
       } catch (error) {
-        console.error('Erreur lors de la récupération des données du livre:', error);
+        console.error('Erreur lors de la création du commentaire', error);
       }
 
     },

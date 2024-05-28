@@ -1,5 +1,5 @@
 // routes.mjs
-import { comment } from "../../sequelize/sequelize.mjs"
+import { Book, comment } from "../../sequelize/sequelize.mjs"
 import express from 'express';
 
 const commentRouter = express();
@@ -8,7 +8,9 @@ import { auth } from "../auth/auth.mjs";
 
 // Route de get
 commentRouter.get('/', auth, (req, res) => {
- return comment.findAll()    
+ return comment.findAll({
+  include: [Book]
+ })    
  .then((comment) => {
     const message = "La liste des commentaires a bien été récupérée.";
     res.status(200).json(comment);
