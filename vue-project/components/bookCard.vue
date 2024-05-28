@@ -5,11 +5,11 @@
     </template>
     <template #title>
       <Skeleton width="100%" height="8rem" v-if="!dataTrue" />
-      <template v-else>{{ book.title }}</template>
+      <template v-else><ProgressBar :value="book.average*20">{{book.average}}/5</ProgressBar> <br>{{ book.title }}</template>
     </template>
     <template #subtitle>
       <Skeleton width="100%" height="2rem" v-if="!dataTrue" />
-      <template v-else>{{ book.pages }} pages <br> categorie {{ book.fk_category }}</template>
+      <template v-else>{{ book.pages }} pages <br> {{ book.t_category.name }}</template>
     </template>
     <template #content>
       <Skeleton width="93%" height="1rem" class="mb-2" style="margin-bottom: 5px;" v-if="!dataTrue" />
@@ -27,6 +27,7 @@
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Skeleton from 'primevue/skeleton';
+import ProgressBar from 'primevue/progressbar';
 
 export default {
   props: {
@@ -42,7 +43,8 @@ export default {
   components: {
     Card,
     Button,
-    Skeleton
+    Skeleton,
+    ProgressBar
   },
   data() {
     return {

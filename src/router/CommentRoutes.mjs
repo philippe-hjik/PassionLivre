@@ -35,10 +35,7 @@ commentRouter.get('/:id', auth, (req, res) => {
 
 // Route de post
 commentRouter.post('/', auth, (req, res) => {
-    const title_book = req.body.title_book;
-    return comment.create({
-        title_book: title_book
-    })
+    return comment.create(req.body)
     .then((comment) => {
         const message = `Le commentaire à bien été créé`;
         res.status(200).json(comment);

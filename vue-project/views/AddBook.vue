@@ -43,7 +43,7 @@
                                     <Calendar dateFormat="yy-mm-dd" v-model="createDate"
                                         placeholder="Date de création" />
                                 </InputGroup>
-
+                                
                                 <label for="first">Auteur</label>
 
                                 <InputGroup class="field">
@@ -106,6 +106,13 @@
                                         dateFormat="yy" />
                                 </InputGroup>
 
+                                <div
+                                    class="flex-auto flex justify-content-center align-items-center font-medium, field">
+                                    <FileUpload mode="basic" chooseLabel="Choose cover image" name="demo[]" accept="image/*"
+                                        :maxFileSize="1000000"/>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -114,8 +121,8 @@
                         <Button label="Publier" severity="success" icon="pi pi-arrow-right" @click="sendData"
                             iconPos="right" />
                     </div>
-                    <Message v-if="requestStatus == 200" severity="success">{{message}}</Message>
-                    <Message v-else-if="requestStatus != 0" severity="error">{{message}}</Message>
+                    <Message v-if="requestStatus == 200" severity="success">{{ message }}</Message>
+                    <Message v-else-if="requestStatus != 0" severity="error">{{ message }}</Message>
 
                 </template>
             </StepperPanel>
@@ -148,6 +155,9 @@ import Divider from 'primevue/divider';
 import Calendar from 'primevue/calendar';
 import Message from 'primevue/message';
 
+import Toast from 'primevue/toast';
+
+
 export default {
     components: {
         Toolbar,
@@ -170,7 +180,8 @@ export default {
         Divider,
         Calendar,
         Image,
-        Message
+        Message,
+        Toast
     },
     data() {
         return {
