@@ -6,8 +6,8 @@ import router from "./router";
 import "../node_modules/primeflex/primeflex.css";
 import "../node_modules/primevue/resources/themes/aura-light-green/theme.css";
 import "../node_modules/primeicons/primeicons.css";
+import ToastService from 'primevue/toastservice';
 import "./style.css";
 import "./flags.css";
 
-
-createApp(App).use(PrimeVue).use(router).mount('#app');
+createApp(App).use(PrimeVue).use(ToastService).use(router).mount('#app');

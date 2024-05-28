@@ -3,7 +3,7 @@
     @click="this.$router.push('/book/');" />
   <Button label="Ajouter un commentaire" severity="info" text raised icon="pi pi-arrow-right" iconPos="right"
     style="margin-top: 25px; margin-left: 25px;" @click="visible = true" />
-
+  <Toast />
   <div v-if="book" class="book-detail">
     <h1>{{ book.title }}</h1>
     <img :src="bookCover" alt="Book Cover" v-if="bookCover">
@@ -47,7 +47,8 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import Rating from 'primevue/rating';
 import Textarea from 'primevue/textarea';
-import { useToast } from "primevue/usetoast";
+import Toast from 'primevue/toast';
+
 
 export default {
   name: "BookDetail",
@@ -64,6 +65,7 @@ export default {
     Dialog,
     Rating,
     Textarea,
+    Toast,
   },
   data() {
     return {
@@ -145,22 +147,28 @@ export default {
             average: rating
           }, config).then((response) => {
 
-            window.location.reload();
+            let message = response.data.message;
+            this.$toast.add({ severity: 'success', summary: 'Info', detail: message, life: 3000 });
 
           }).catch((error) => {
 
+            let message = error.response.data;
+            this.$toast.add({ severity: 'error', summary: 'Info', detail: message, life: 3000 });
 
           });
 
         }).catch((error) => {
 
-
+          let message = error.response.data;
+          this.$toast.add({ severity: 'error', summary: 'Info', detail: message, life: 3000 });
         });
 
         console.log(response);
 
       } catch (error) {
         console.error('Erreur lors de la création du commentaire', error);
+        let message = error.response.data;
+        this.$toast.add({ severity: 'error', summary: 'Info', detail: message, life: 10000 });
       }
 
     },
